@@ -41,7 +41,7 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 51, 0, 102;
+  --bs-primary-rgb: 0, 0, 250;
   --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -61,6 +61,7 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: white;
   --bs-body-bg: black;
+  --teste: 0, 0, 100;
 }
 
 *,
@@ -7800,7 +7801,7 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(var(--teste), var(--bs-bg-opacity)) !important;
 }
 
 .bg-secondary {
@@ -11361,7 +11362,7 @@ p.lead {
   #sideNav .navbar-brand .img-profile {
     max-width: 10rem;
     max-height: 10rem;
-    border: 0.5rem solid black;
+    border: 0.5rem solid white;
   }
   #sideNav .navbar-collapse {
     display: flex;
