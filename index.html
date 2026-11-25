@@ -86,9 +86,34 @@
 
     /* ---------- Intro ---------- */
     .intro {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
-      gap: 2rem;
+      column-gap: 2rem;
+    }
+
+    /* Languages and tools: under the links, or in its own column on wide screens. */
+    .skills {
+      grid-column: 2;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      gap: 0.3rem 1.25rem;
+      margin: 1.5rem 0 0;
+      font-size: 0.9375rem;
+      line-height: 1.45;
+    }
+    .skills > div { display: contents; }
+    .skills dt { color: var(--muted); }
+    .skills dd { margin: 0; }
+
+    @media (min-width: 1200px) {
+      .intro { grid-template-columns: auto minmax(0, 1fr) minmax(0, 27rem); }
+      .skills {
+        grid-column: 3;
+        margin: 0;
+        padding: 0.4rem 0 0.4rem 2rem;
+        border-left: 1px solid var(--rule);
+      }
     }
 
     .portrait {
@@ -277,7 +302,6 @@
       row-gap: 4rem;
       margin-top: 4.5rem;
     }
-    .col-a > section + section { margin-top: 3.5rem; }
     @media (max-width: 899px), (min-width: 1200px) {
       .col-c > section + section { margin-top: 3.5rem; }
     }
@@ -376,7 +400,9 @@
     /* ---------- Phones ---------- */
     @media (max-width: 559px) {
       main { padding: 3rem 1rem 2rem; }
-      .intro { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .intro { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; }
+      .skills { grid-column: 1; margin-top: 0; grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .skills dd { margin-bottom: 0.45rem; }
       .portrait { width: 88px; height: 88px; }
       .brickwork { margin-top: 3rem; }
       .wall { --per: 3; --gap: 4px; }
@@ -407,6 +433,12 @@
           <li><a href="http://lattes.cnpq.br/3947473564013190">Lattes</a></li>
         </ul>
       </div>
+      <dl class="skills" aria-label="Languages and tools">
+        <div><dt>Languages</dt><dd>Portuguese (native), English (C1), German (B2)</dd></div>
+        <div><dt>Programming</dt><dd>Python, C++, DPC++ / SYCL, Qiskit, PennyLane</dd></div>
+        <div><dt>Quantum</dt><dd>QAOA, quantum annealing, D-Wave, QLM</dd></div>
+        <div><dt>Tools</dt><dd>Git, Docker, Linux</dd></div>
+      </dl>
     </header>
 
     <div class="brickwork">
@@ -530,23 +562,6 @@
               </ul>
             </div>
           </article>
-        </section>
-
-        <section aria-labelledby="skills">
-          <h2 id="skills">Languages and tools</h2>
-
-          <div class="entry">
-            <div class="when">Languages</div>
-            <div class="what">Portuguese (native), English (C1), German (B2)</div>
-          </div>
-          <div class="entry">
-            <div class="when">Programming</div>
-            <div class="what">Python, C++, DPC++ / SYCL, Qiskit, PennyLane</div>
-          </div>
-          <div class="entry">
-            <div class="when">Tools</div>
-            <div class="what">Git, Docker, Linux</div>
-          </div>
         </section>
       </div>
 
