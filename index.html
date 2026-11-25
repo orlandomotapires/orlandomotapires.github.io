@@ -5,9 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Orlando Mota Pires</title>
   <meta name="description" content="Orlando Mota Pires: computer engineer working on hybrid quantum–classical algorithms, high-performance computing and biosignals. Research, thesis, software and publications.">
+  <link rel="canonical" href="https://orlandomotapires.github.io/">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://orlandomotapires.github.io/">
   <meta property="og:title" content="Orlando Mota Pires">
   <meta property="og:description" content="Research, thesis, software and publications on quantum computing, HPC and biosignals.">
-  <meta property="og:image" content="https://orlandomotapires.github.io/assets/img/profile-square.jpg">
+  <meta property="og:image" content="https://orlandomotapires.github.io/assets/img/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Orlando Mota Pires, computer engineer, with a wall of bricks for his papers, thesis, software and milestones.">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Orlando Mota Pires",
+    "url": "https://orlandomotapires.github.io/",
+    "image": "https://orlandomotapires.github.io/assets/img/profile-square.jpg",
+    "jobTitle": "Computer engineer",
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Universidade Senai Cimatec" },
+      { "@type": "CollegeOrUniversity", "name": "RWTH Aachen University" }
+    ],
+    "knowsAbout": ["Quantum computing", "QAOA", "Quantum annealing", "High-performance computing", "Graph partitioning", "Biosignals"],
+    "sameAs": [
+      "https://github.com/orlandomotapires",
+      "https://www.linkedin.com/in/orlando-mota-0360a5209/",
+      "http://lattes.cnpq.br/3947473564013190"
+    ]
+  }
+  </script>
   <meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#141A23" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='18' width='14' height='9' rx='1.5' fill='%23A9BEE3'/%3E%3Crect x='17' y='18' width='14' height='9' rx='1.5' fill='%23A9BEE3'/%3E%3Crect x='8' y='7' width='14' height='9' rx='1.5' fill='%232F5DA8'/%3E%3C/svg%3E">
@@ -137,6 +164,12 @@
       max-width: 44em;
       margin: 0.75rem 0 0;
       color: var(--muted);
+    }
+
+    /* What I'm looking for: in ink, so it reads before the muted role line ends. */
+    .seeking {
+      max-width: 44em;
+      margin: 0.35rem 0 0;
     }
 
     .links {
@@ -378,6 +411,11 @@
       list-style: none;
     }
 
+    /* Figures drawn on white: tone them down so they don't glare in dark mode. */
+    @media (prefers-color-scheme: dark) {
+      .shot.on-white { filter: brightness(0.86); }
+    }
+
     .shot {
       display: block;
       width: 100%;
@@ -426,6 +464,7 @@
       <div class="intro-text">
         <h1>Orlando Mota Pires</h1>
         <p class="role">Computer engineer working on hybrid quantum–classical algorithms, high-performance computing and biosignals.</p>
+        <p class="seeking">I’m looking for a research position in quantum computing, and to continue my studies in a master’s programme.</p>
         <ul class="links">
           <li><a href="assets/pdf/CV-OrlandoMota.pdf">CV (PDF)</a></li>
           <li><a href="https://github.com/orlandomotapires">GitHub</a></li>
@@ -467,8 +506,8 @@
           <div class="what">
             <h3>Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition</h3>
             <p class="org">Bachelor’s thesis, Universidade Senai Cimatec. Supervised by MSc. Stefan Schröder and Dr. Anderson Buarque.</p>
-            <p>A method and implementation for partitioning simulation domains with a hybrid quantum–classical algorithm, applied to manufacturing simulations at Fraunhofer IPT.</p>
-            <img class="shot" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part.">
+            <p>A method and implementation for partitioning simulation domains with a hybrid quantum–classical algorithm, applied to manufacturing simulations at Fraunhofer IPT. On the first of two ANSYS blade models, the best run cut the worst-case number of solver iterations by about 64%. On the denser second model, the cut was 1.2%.</p>
+            <img class="shot on-white" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part.">
             <ul class="refs">
               <li><a href="assets/pdf/Hybrid_Quantum_Classical_Graph_Partitioning_Algorithm_for_Domain_Decomposition.pdf">Thesis (PDF, 4.6 MB)</a></li>
               <li><a href="#hdd-studio">The software: HDD Studio</a></li>
@@ -484,7 +523,7 @@
             <p>A desktop app and command-line tool that reorders any square sparse matrix into diagonal blocks, by partitioning its graph with METIS, quantum annealing or QAOA, locally or on D-Wave and QLM quantum hardware.</p>
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/hdd-studio.webp">
-              <img class="shot" src="assets/img/projects/hdd-studio.gif" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
+              <img class="shot" src="assets/img/projects/hdd-studio-demo.webp" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
             </picture>
             <ul class="refs">
               <li><a href="https://github.com/orlandomotapires/hybrid_domain_decomposition">Code on GitHub</a></li>
@@ -502,8 +541,8 @@
               <!-- Still images for people who ask for reduced motion; the first matching source wins. -->
               <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-dark.webp">
               <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/ketlab-light.webp">
-              <source media="(prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-demo-dark.gif">
-              <img class="shot" src="assets/img/projects/ketlab-demo-light.gif" width="1200" height="750" loading="lazy" alt="Recording of a Ket Lab lesson: typing qc.h(0) and qc.cx(0, 1) draws the circuit and moves the state to the Bell state; Check confirms it with a fidelity of 100%.">
+              <source media="(prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-demo-dark.webp">
+              <img class="shot" src="assets/img/projects/ketlab-demo-light.webp" width="1200" height="750" loading="lazy" alt="Recording of a Ket Lab lesson: typing qc.h(0) and qc.cx(0, 1) draws the circuit and moves the state to the Bell state; Check confirms it with a fidelity of 100%.">
             </picture>
             <ul class="refs">
               <li><a href="https://orlandomotapires.github.io/ket-lab/">Open Ket Lab</a></li>
