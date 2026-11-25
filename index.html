@@ -41,6 +41,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <script>
+    try {
+      var savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
+    } catch (e) {}
+  </script>
   <style>
     :root {
       --paper: #FBFBF9;
@@ -59,8 +65,12 @@
       --brick-hover: #C3D3EE;
     }
 
+    /* Theme: follows the system unless the visitor picks one with the button,
+       which sets data-theme on <html>. The dark values are repeated for both cases. */
+    :root { color-scheme: light; }
     @media (prefers-color-scheme: dark) {
-      :root {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
         --paper: #141A23;
         --ink: #E4E8EE;
         --muted: #9AA3B1;
@@ -76,6 +86,51 @@
         --brick-hover: #30446A;
       }
     }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #141A23;
+      --ink: #E4E8EE;
+      --muted: #9AA3B1;
+      --rule: #3A4556;
+      --accent: #8FB1EA;
+      --mark: #1C2738;
+
+      --brick-paper: #24324A;
+      --brick-software: #3A5280;
+      --brick-thesis: #8FB1EA;
+      --brick-thesis-ink: #141A23;
+      --brick-milestone-edge: #66748A;
+      --brick-hover: #30446A;
+    }
+
+    /* Images with a light and a dark version. */
+    .only-dark { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .only-dark { display: block; }
+      :root:not([data-theme="light"]) .only-light { display: none; }
+    }
+    :root[data-theme="dark"] .only-dark { display: block; }
+    :root[data-theme="dark"] .only-light { display: none; }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: clamp(1.5rem, 5vw, 5rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .theme-toggle:hover { color: var(--ink); border-color: var(--muted); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .theme-toggle svg { width: 0.95rem; height: 0.95rem; }
 
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -94,6 +149,7 @@
 
     /* Wide frame with generous side padding; columns inside keep lines short. */
     main {
+      position: relative;
       max-width: 96rem;
       margin: 0 auto;
       padding: 4.5rem clamp(1.5rem, 5vw, 5rem) 3rem;
@@ -415,8 +471,9 @@
 
     /* Figures drawn on white: tone them down so they don't glare in dark mode. */
     @media (prefers-color-scheme: dark) {
-      .shot.on-white { filter: brightness(0.86); }
+      :root:not([data-theme="light"]) .shot.on-white { filter: brightness(0.86); }
     }
+    :root[data-theme="dark"] .shot.on-white { filter: brightness(0.86); }
 
     .shot {
       display: block;
@@ -439,7 +496,8 @@
 
     /* ---------- Phones ---------- */
     @media (max-width: 559px) {
-      main { padding: 3rem 1rem 2rem; }
+      main { padding: 3.5rem 1rem 2rem; }
+      .theme-toggle { top: 1rem; right: 1rem; }
       .intro { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; }
       .skills { grid-column: 1; margin-top: 0; grid-template-columns: minmax(0, 1fr); gap: 0; }
       .skills dd { margin-bottom: 0.45rem; }
@@ -461,6 +519,11 @@
 </head>
 <body>
   <main>
+    <button class="theme-toggle" id="theme-toggle" type="button" hidden>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+      <span id="theme-toggle-label">Light mode</span>
+    </button>
+
     <header class="intro">
       <img class="portrait" src="assets/img/profile-square.jpg" width="112" height="112" alt="Portrait of Orlando Mota Pires">
       <div class="intro-text">
@@ -539,12 +602,14 @@
             <h3>Ket Lab</h3>
             <p class="org">A quantum computing course that runs in the browser</p>
             <p>Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks take you from a single qubit to quantum annealing, with nothing to install.</p>
-            <picture>
-              <!-- Still images for people who ask for reduced motion; the first matching source wins. -->
-              <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-dark.webp">
+            <!-- One recording per theme; each falls back to a still image for reduced motion. -->
+            <picture class="only-light">
               <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/ketlab-light.webp">
-              <source media="(prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-demo-dark.webp">
               <img class="shot" src="assets/img/projects/ketlab-demo-light.webp" width="1200" height="750" loading="lazy" alt="Recording of a Ket Lab lesson: typing qc.h(0) and qc.cx(0, 1) draws the circuit and moves the state to the Bell state; Check confirms it with a fidelity of 100%.">
+            </picture>
+            <picture class="only-dark">
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/ketlab-dark.webp">
+              <img class="shot" src="assets/img/projects/ketlab-demo-dark.webp" width="1200" height="750" loading="lazy" alt="Recording of a Ket Lab lesson: typing qc.h(0) and qc.cx(0, 1) draws the circuit and moves the state to the Bell state; Check confirms it with a fidelity of 100%.">
             </picture>
             <ul class="refs">
               <li><a href="https://orlandomotapires.github.io/ket-lab/">Open Ket Lab</a></li>
@@ -756,6 +821,36 @@
       <p>Find me on <a href="https://www.linkedin.com/in/orlando-mota-0360a5209/">LinkedIn</a> or <a href="https://github.com/orlandomotapires">GitHub</a>, or download my <a href="assets/pdf/CV-OrlandoMota.pdf">CV</a>.</p>
     </footer>
   </main>
+
+  <script>
+    // Theme button: switches between light and dark and remembers the choice.
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('theme-toggle');
+      var label = document.getElementById('theme-toggle-label');
+      var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function current() {
+        return root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+      }
+      function render() {
+        var dark = current() === 'dark';
+        label.textContent = dark ? 'Light mode' : 'Dark mode';
+        button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      button.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        render();
+      });
+      if (systemDark.addEventListener) systemDark.addEventListener('change', render);
+
+      button.hidden = false;
+      render();
+    })();
+  </script>
 
   <script>
     // The wall: one brick per element marked data-brick, laid oldest first
