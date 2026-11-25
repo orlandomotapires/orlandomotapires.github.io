@@ -133,14 +133,16 @@
     .skills dt { color: var(--muted); }
     .skills dd { margin: 0; }
 
-    @media (min-width: 1200px) {
-      .intro { grid-template-columns: auto minmax(0, 1fr) minmax(0, 27rem); }
+    /* Wide screens: the list gets its own column, sized so every row stays on one line. */
+    @media (min-width: 1400px) {
+      .intro { grid-template-columns: auto minmax(0, 1fr) max-content; column-gap: 2.5rem; }
       .skills {
         grid-column: 3;
         margin: 0;
         padding: 0.4rem 0 0.4rem 2rem;
         border-left: 1px solid var(--rule);
       }
+      .skills dd { white-space: nowrap; }
     }
 
     .portrait {
