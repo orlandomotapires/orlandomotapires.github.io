@@ -1,354 +1,796 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orlando Mota Pires</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin-top: 70px; /* To prevent content from hiding under the fixed header */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orlando Mota Pires</title>
+  <meta name="description" content="Orlando Mota Pires: computer engineer working on hybrid quantum–classical algorithms, high-performance computing and biosignals. Research, thesis, software and publications.">
+  <meta property="og:title" content="Orlando Mota Pires">
+  <meta property="og:description" content="Research, thesis, software and publications on quantum computing, HPC and biosignals.">
+  <meta property="og:image" content="https://orlandomotapires.github.io/assets/img/profile-square.jpg">
+  <meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141A23" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='18' width='14' height='9' rx='1.5' fill='%23A9BEE3'/%3E%3Crect x='17' y='18' width='14' height='9' rx='1.5' fill='%23A9BEE3'/%3E%3Crect x='8' y='7' width='14' height='9' rx='1.5' fill='%232F5DA8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FBFBF9;
+      --ink: #1B2433;
+      --muted: #5D6573;
+      --rule: #C9D0DA;
+      --accent: #2F5DA8;
+      --mark: #EAF0FA;
 
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+      /* Brick kinds */
+      --brick-paper: #DCE5F3;
+      --brick-software: #AFC4E8;
+      --brick-thesis: #2F5DA8;
+      --brick-thesis-ink: #FFFFFF;
+      --brick-milestone-edge: #8F9BAD;
+      --brick-hover: #C3D3EE;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #141A23;
+        --ink: #E4E8EE;
+        --muted: #9AA3B1;
+        --rule: #3A4556;
+        --accent: #8FB1EA;
+        --mark: #1C2738;
 
-        header nav {
-            margin-top: 1rem;
-        }
+        --brick-paper: #24324A;
+        --brick-software: #3A5280;
+        --brick-thesis: #8FB1EA;
+        --brick-thesis-ink: #141A23;
+        --brick-milestone-edge: #66748A;
+        --brick-hover: #30446A;
+      }
+    }
 
-        header nav a {
-            color: #fff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    *, *::before, *::after { box-sizing: border-box; }
 
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: left;
-            padding: 5rem 2rem;
-            background: #f4f4f4;
-        }
+    html { -webkit-text-size-adjust: 100%; }
+    [hidden] { display: none !important; }
 
-        .hero img {
-            border-radius: 35%;
-            max-width: 200px;
-            margin-right: 2rem;
-        }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      font-optical-sizing: auto;
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    /* Wide frame with generous side padding; columns inside keep lines short. */
+    main {
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: 4.5rem clamp(1.5rem, 5vw, 5rem) 3rem;
+    }
 
-        .hero p {
-            font-size: 1.2rem;
-        }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+    }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
 
-        .social-icons {
-            margin-top: 1rem;
-        }
+    /* ---------- Intro ---------- */
+    .intro {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
 
-        .social-icons a {
-            margin-right: 0.5rem;
-        }
+    .portrait {
+      flex: none;
+      display: block;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-        .container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 3.75rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin: 0;
+    }
 
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #333;
-            display: inline-block;
-        }
+    .role {
+      max-width: 44em;
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+    }
 
-        .card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.25rem;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
 
-        .card h3 {
-            margin-top: 0;
-        }
+    /* ---------- Statement + wall ---------- */
+    .brickwork { margin-top: 3.5rem; }
 
-        @media (min-width: 768px) {
-            .hero h1 {
-                font-size: 4rem;
-            }
+    .statement {
+      max-width: 30em;
+      margin: 0;
+      font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+      font-style: italic;
+      line-height: 1.45;
+    }
 
-            .hero p {
-                font-size: 1.5rem;
-            }
+    .wall-wrap { margin-top: 2rem; }
 
-            .card {
-                display: flex;
-                justify-content: space-between;
-            }
+    .wall {
+      --per: 5;
+      --gap: 6px;
+      /* Sized so an offset row (half brick + per bricks) exactly fills the width. */
+      --w: calc((100% - (var(--per) - 0.5) * var(--gap)) / (var(--per) + 0.5));
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      padding-bottom: var(--gap);
+      border-bottom: 2px solid var(--ink);
+    }
 
-            .card .content {
-                flex: 1;
-            }
-        }
+    .wall-row { display: flex; gap: var(--gap); }
+    /* Margin, not padding: brick widths are a % of the row, so the row must stay full width. */
+    .wall-row.offset > :first-child { margin-left: calc(var(--w) / 2 + var(--gap) / 2); }
 
-        /* Add scroll-margin-top to each section */
-        section {
-            scroll-margin-top: 70px; /* Adjust this value if the header height changes */
-        }
-    </style>
+    .brick {
+      flex: 0 0 var(--w);
+      min-width: 0;
+      height: 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.45rem 0.65rem 0.5rem;
+      border-radius: 3px;
+      background: var(--brick-paper);
+      color: var(--ink);
+      font-size: 0.8125rem;
+      line-height: 1.25;
+      text-decoration: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .brick:hover { background: var(--brick-hover); }
+
+    .brick-year {
+      color: var(--muted);
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    .brick-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-weight: 600;
+    }
+
+    .brick.software { background: var(--brick-software); }
+    .brick.software .brick-year { color: var(--ink); opacity: 0.75; }
+
+    .brick.thesis { background: var(--brick-thesis); color: var(--brick-thesis-ink); }
+    .brick.thesis .brick-year { color: inherit; opacity: 0.8; }
+    .brick.thesis:hover { filter: brightness(1.08); }
+
+    .brick.milestone {
+      background: transparent;
+      border: 1.5px solid var(--brick-milestone-edge);
+    }
+    .brick.milestone:hover { background: var(--mark); }
+
+    .brick.next {
+      background: transparent;
+      border: 1.5px dashed var(--rule);
+    }
+
+    .wall.laying .brick {
+      animation: lay 0.4s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+      animation-delay: calc(var(--i) * 55ms + 150ms);
+    }
+    @keyframes lay {
+      from { opacity: 0; transform: translateY(-12px); }
+    }
+
+    .wall-legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.3rem 1.1rem;
+      margin: 0.7rem 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+    .wall-legend li { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .swatch {
+      display: inline-block;
+      width: 1.15rem;
+      height: 0.7rem;
+      border-radius: 2px;
+    }
+    .swatch.paper { background: var(--brick-paper); }
+    .swatch.thesis { background: var(--brick-thesis); }
+    .swatch.software { background: var(--brick-software); }
+    .swatch.milestone { border: 1.5px solid var(--brick-milestone-edge); }
+
+    @media (min-width: 1200px) {
+      .wall { --per: 4; }
+      /* The statement and the wall side by side, resting on the same line. */
+      .brickwork {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        column-gap: 4.5rem;
+        align-items: end;
+      }
+      .wall-wrap { margin-top: 0; }
+      .statement { padding-bottom: 2.6rem; }
+    }
+
+    /* ---------- Sections ---------- */
+    h2 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 0 0 0.4rem;
+    }
+
+    .featured { margin-top: 5rem; }
+
+    .featured .entries {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      column-gap: 3.5rem;
+    }
+    @media (min-width: 700px) {
+      .featured .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    /* With two columns, the thesis takes a full row and the two programs sit side by side. */
+    @media (min-width: 700px) and (max-width: 1099px) {
+      .featured #thesis { grid-column: 1 / -1; }
+    }
+    @media (min-width: 1100px) {
+      .featured .entries { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    /* Research | Publications | Teaching, education and skills */
+    .columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 4rem;
+      margin-top: 4.5rem;
+    }
+    .col-a > section + section { margin-top: 3.5rem; }
+    @media (max-width: 899px), (min-width: 1200px) {
+      .col-c > section + section { margin-top: 3.5rem; }
+    }
+    @media (min-width: 900px) {
+      .columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 3.5rem;
+      }
+      .col-c {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 3.5rem;
+      }
+    }
+    @media (min-width: 1200px) {
+      .columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .col-c { grid-column: auto; display: block; }
+    }
+
+    /* ---------- Entries ---------- */
+    .entry {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      margin: 0 -0.75rem;
+      padding: 0.8rem 0.75rem;
+      border-radius: 4px;
+    }
+    .entry:target { background: var(--mark); }
+    @media (prefers-reduced-motion: no-preference) {
+      .entry:target { animation: mark 2.4s ease-out; }
+      @keyframes mark { from { background: var(--brick-hover); } }
+    }
+
+    .when {
+      padding-bottom: 0.1rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+
+    /* Mid widths: one column, date on the left. */
+    @media (min-width: 560px) and (max-width: 899px) {
+      .entry { grid-template-columns: 7rem minmax(0, 1fr); column-gap: 1.5rem; }
+      .when { padding: 0.15rem 0 0; font-size: 0.9375rem; }
+    }
+
+    @media (min-width: 900px) {
+      .entry { font-size: 1.0625rem; }
+    }
+
+    .what { max-width: 38em; }
+
+    h3 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .org, .meta { color: var(--muted); }
+    .what p { margin: 0.2rem 0 0; }
+    .what .org { margin-top: 0; }
+    .authors { font-size: 0.9375rem; }
+    .authors strong { font-weight: 600; }
+
+    .refs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 1.25rem;
+      margin: 0.35rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .shot {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0.85rem 0 0.15rem;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+    }
+
+    .nowrap { white-space: nowrap; }
+
+    footer {
+      margin-top: 5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+
+    /* ---------- Phones ---------- */
+    @media (max-width: 559px) {
+      main { padding: 3rem 1rem 2rem; }
+      .intro { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .portrait { width: 88px; height: 88px; }
+      .brickwork { margin-top: 3rem; }
+      .wall { --per: 3; --gap: 4px; }
+      .brick { font-size: 0.7rem; height: 4.4rem; padding: 0.35rem 0.4rem; }
+      .brick-title { -webkit-line-clamp: 3; }
+      .entry { margin: 0 -0.5rem; padding: 0.75rem 0.5rem; }
+      .featured { margin-top: 3.5rem; }
+      .columns { margin-top: 3.5rem; row-gap: 3.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wall.laying .brick { animation: none; }
+      .brick { transition: none; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#bachelor-thesis">Bachelor Thesis</a>
-            <a href="#skills">Skills</a>
-            <a href="#publications">Publications</a>
-            <a href="#thoughts">Thoughts</a>
-        </nav>
+  <main>
+    <header class="intro">
+      <img class="portrait" src="assets/img/profile-square.jpg" width="112" height="112" alt="Portrait of Orlando Mota Pires">
+      <div class="intro-text">
+        <h1>Orlando Mota Pires</h1>
+        <p class="role">Computer engineer working on hybrid quantum–classical algorithms, high-performance computing and biosignals. Until August 2026 I was at the Fraunhofer Institute for Production Technology IPT in Aachen, Germany.</p>
+        <ul class="links">
+          <li><a href="assets/pdf/CV-OrlandoMota.pdf">CV (PDF)</a></li>
+          <li><a href="https://github.com/orlandomotapires">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/orlando-mota-0360a5209/">LinkedIn</a></li>
+          <li><a href="http://lattes.cnpq.br/3947473564013190">Lattes</a></li>
+        </ul>
+      </div>
     </header>
 
-    <section class="hero" id="about">
-        <img src="assets/img/profile.jpg" alt="Orlando Mota">
-        <div>
-            <h1>Orlando Mota Pires</h1>
-            <p>Student Researcher at Fraunhofer Institute for Production Technology IPT</p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/orlando-mota-0360a5209/"><img align="left" alt="LinkedIn" width="35px" src="https://user-images.githubusercontent.com/80331468/270190539-60d7da88-5151-4841-a44b-6fad612242d8.png" /></a>
-                <a href="https://devmesh.intel.com/users/orlando-mota"><img align="left" alt="IntelDevMesh" width="35px" src="https://user-images.githubusercontent.com/80331468/270190389-c4e28768-5ec7-436f-9a2c-e20dfb014fad.png" /></a>
-                <a href="http://lattes.cnpq.br/3947473564013190"><img align="left" alt="Lattes" width="35px" src="https://www.gov.br/observatorio/pt-br/assuntos/programas-academicos/imagens/Lattes.png" /></a>
-                <a href="https://github.com/orlandomotapires"><img align="left" alt="Github" width="35px" src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/github.svg" /></a>
-                <a href="assets/pdf/CV-OrlandoMota.pdf"><img align="left" alt="Curriculum" width="35px" src="https://cdn-icons-png.flaticon.com/512/2680/2680976.png" /></a>
-                
-            </div>
-        </div>
-    </section>
+    <div class="brickwork">
+      <p class="statement">I’m passionate about computing, physics and understanding the mysteries of the universe. I hope that one day I’ll contribute my own brick to the monumental wall of knowledge that humanity has been building since ancient times.</p>
 
-    <div class="container">
-        <!-- Education -->
-        <section id="education">
-            <h2 class="section-title">Education</h2>
-            <div class="card">
-                <div class="content">
-                    <h3>Colégio Cândido Portinari</h3>
-                    <p>High School Diploma</p>
-                    <p>January 2014 - December 2020</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Senai CIMATEC</h3>
-                    <p>Bachelor in Computer Engineering</p>
-                    <p>January 2021 - Present</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>RWTH Aachen University</h3>
-                    <p>Visiting Student</p>
-                    <p>December 2024 - August 2026</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section id="experience">
-            <h2 class="section-title">Experience</h2>
-            <div class="card">
-                <div class="content">
-                    <h3>Monitor of Computational Thinking and Algorithms</h3>
-                    <p>February 2022 - December 2022</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Co-founder of Programming Club at Senai CIMATEC</h3>
-                    <p>Teaching algorithms and computer logic to students from computer
-                        engineering and other courses and organizing competitive programming marathons like OBI
-                        and SBC, as well as managed the organization and maintenance of the Student Initiative.</p>
-                    <p>October 2021 - March 2024</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Scientific Initiation at Senai CIMATEC HPC Center</h3>
-                    <p>Demonstrate the applicability of the DPC++ language in the development of
-                        scientific computational codes in academic and industrial contexts. </p>
-                    <p>July 2022 - December 2022</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Scientific Initiation at Senai CIMATEC HPC Center</h3>
-                    <p>Creation of introductory python notebooks for learning basic neural networks
-                    and artificial intelligence concepts. <a href="https://github.com/muriloboratto/AI-university-assignments">Link to GitHub repository</a></p>
-                    <p>January 2023 - December 2023</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="content">
-                    <h3>Scientific Initiation at Senai CIMATEC</h3>
-                    <p>Modeling Time Series from Brain Activity</p>
-                    <p>March 2024 - Present</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Intern Student at Senai CIMATEC LAQCC</h3>
-                    <p>Working with Quantum Computing and Bio-signals at LAQCC (Latino America Quantum Computing Center)</p>
-                    <p>March 2024 - Present</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Fraunhofer Institute for Production Technology IPT</h3>
-                    <p>High-precision cutting simulation using quantum computing.</p>
-                    <p>February 2025 - Present</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bachelor Thesis -->
-        <section id="bachelor-thesis">
-            <h2 class="section-title">Bachelor Thesis</h2>
-            <div class="card">
-                <div class="content">
-                    <h3>Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition</h3>
-                    <p>Formulate a methodology and implementation for hybrid quantum-classical graph partitioning algorithm for domain decomposition in manufacturing simulations.</p>
-                    
-                    <a href="assets\pdf\Hybrid_Quantum_Classical_Graph_Partitioning_Algorithm_for_Domain_Decomposition.pdf" class="text-primary">Bachelor Thesis PDF</a>
-                    <br>
-                    <a href="https://github.com/orlandomotapires/hybrid_domain_decomposition" class="text-primary">Link to GitHub repository</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Others -->
-        <section id="others">
-            <h2 class="section-title">Others</h2>
-            <div class="card">
-                <div class="content">
-                    <h3>Intel Student ambassador</h3>
-                    <div class="content">
-                        <p>Acting as a student ambassador for Intel, I leverage Intel technologies within the
-                            university environment to enhance students' understanding and utilization of these advanced tools
-                            and technologies.</p>
-
-                        <a href="https://devmesh.intel.com/users/orlando-mota" class="text-primary">Profile on Devmash</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills -->
-        <section id="skills">
-            <h2 class="section-title">Skills</h2>
-            <div class="card">
-                <div class="content">
-                    <h3>Programming Languages & Tools</h3>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="devicon-cplusplus-python-plain" title="C++, Python"></i>C++, Python</li>
-                        <li class="list-inline-item"><i class="devicon-git-docker-plain" title="Git, Docker"></i> Git, Docker</li>
-                        <li class="list-inline-item"><i class="devicon-parallel-plain" title="Parallel"></i>Qiskit</li>
-                        <li class="list-inline-item"><i class="devicon-linux-plain" title="Linux"></i> Linux</li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Languages</h3>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">Portuguese - <strong><i>Native</i></strong> </li>
-                        <li class="list-inline-item">English - <strong><i>C1</i></strong></li>
-                        <li class="list-inline-item">German - <strong><i>B2</i></strong></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications -->
-        <section id="publications">
-            <h2 class="section-title">Publications</h2>
-            <div class="card">
-                <div class="content">
-                    <h3>Tuning a CPU-Computation in a DPC++ Based Stencil Computation in a Multi-Device Environment</h3>
-                    <p>CONCEIÇÃO, T.; RODRIGUES, A.H.; PIRES, O.; SOARES, L.</p>
-                    <p>Journal of Bioengineering, Technologies and Health, v. 10, p. 1-13, 2018</p>
-                    <a href="http://www.jbth.com.br/index.php/JBTH/article/view/269" class="text-primary">Paper</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>OneAPI: an Approach for Developer-Centered Heterogeneous Computing</h3>
-                    <p>CONCEIÇÃO, T.; RODRIGUES, A.H.; PIRES, O.; SOARES, L.</p>
-                    <p>WSCAD22, v.10, p. 1-13, 2018</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Statistical Study of Eco-Efficiency in Compact and Average Cars (Chevrolet, Ford, VW, Fiat, Renault) in Brazil Based on the Metro Table in 2019.</h3>
-                    <p>WENCESLAU, A; WIDMER, A; DUNKEL, G; SAMUEL, J; PIRES, O; NASCIMENTO, Aloisio</p>
-                    <p>Journal of Bioengineering, Technologies and Health, p. 1-7, 2019.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Protótipo de Correlação de Eventos de Leitura Labial com Medidas Temporais e Legendas</h3>
-                    <p>Orlando Mota Pires; João Marcelo Silva Souza; Caroline da Silva M. Alves; Jés de Jesus F. Cerqueira; Wagner Luiz A. de Oliveira</p>
-                    <p>XXV Congresso Brasileiro de Automática</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h3>Facial Biosignals Time–Series Dataset (FBioT): A Visual–Temporal Facial Expression Recognition (VT-FER) Approach</h3>
-                    <p>João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, Orlando Mota Pires, Naiara Silva Bonfim dos Santos, Andre Brasil Vieira Wyzykowski, Oberdan Rocha Pinheiro, Daniel Gomes de Almeida Filho, Marcelo Oliveira da Silva and Josiane Dantas Viana Barbosa</p>
-                    <p>Electronics 2024, 13(24), 4867; https://doi.org/10.3390/electronics13244867</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Thoughts -->
-        <section id="thoughts">
-            <h2 class="section-title">Thoughts</h2>
-            <div class="card">
-                <div class="content">
-                    <p><strong>A young person passionate about computing, physics, and understanding the mysteries of the universe.</strong></p>
-                    <p>I harbor the aspiration that one day I'll be able to contribute my own 'brick' to the monumental 'wall of knowledge' that humanity has been building since ancient times.</p>
-                </div>
-            </div>
-        </section>
+      <div class="wall-wrap">
+        <!-- Built by the script at the bottom from every element marked data-brick:
+             data-kind (paper, thesis, software, milestone), data-date (YYYY-MM, for order),
+             data-short (brick label) and optionally data-title (tooltip). -->
+        <nav class="wall" id="wall" aria-label="My work so far, oldest at the bottom" hidden></nav>
+        <ul class="wall-legend" id="wall-legend" hidden>
+          <li>My bricks so far, oldest at the bottom:</li>
+          <li><span class="swatch paper"></span>Paper</li>
+          <li><span class="swatch thesis"></span>Thesis</li>
+          <li><span class="swatch software"></span>Software</li>
+          <li><span class="swatch milestone"></span>Milestone</li>
+        </ul>
+      </div>
     </div>
 
+    <section class="featured" aria-labelledby="featured-heading">
+      <h2 id="featured-heading">Thesis and software</h2>
+      <div class="entries">
+        <article class="entry" id="thesis" data-brick data-kind="thesis" data-date="2026-08" data-short="Thesis: quantum graph partitioning">
+          <div class="when">2026</div>
+          <div class="what">
+            <h3>Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition</h3>
+            <p class="org">Bachelor’s thesis, Universidade Senai Cimatec. Supervised by MSc. Stefan Schröder and Dr. Anderson Buarque.</p>
+            <p>A method and implementation for partitioning simulation domains with a hybrid quantum–classical algorithm, applied to manufacturing simulations at Fraunhofer IPT.</p>
+            <img class="shot" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part.">
+            <ul class="refs">
+              <li><a href="assets/pdf/Hybrid_Quantum_Classical_Graph_Partitioning_Algorithm_for_Domain_Decomposition.pdf">Thesis (PDF, 4.6 MB)</a></li>
+              <li><a href="#hdd-studio">The software: HDD Studio</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="entry" id="hdd-studio" data-brick data-kind="software" data-date="2025-10" data-short="HDD Studio">
+          <div class="when">2025 – 2026</div>
+          <div class="what">
+            <h3>HDD Studio</h3>
+            <p class="org">Hybrid domain decomposition, the software behind my thesis</p>
+            <p>A desktop app and command-line tool that reorders any square sparse matrix into diagonal blocks, by partitioning its graph with METIS, quantum annealing or QAOA, locally or on D-Wave and QLM quantum hardware.</p>
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/hdd-studio.webp">
+              <img class="shot" src="assets/img/projects/hdd-studio.gif" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
+            </picture>
+            <ul class="refs">
+              <li><a href="https://github.com/orlandomotapires/hybrid_domain_decomposition">Code on GitHub</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="entry" id="ket-lab" data-brick data-kind="software" data-date="2026-11" data-short="Ket Lab">
+          <div class="when">2026</div>
+          <div class="what">
+            <h3>Ket Lab</h3>
+            <p class="org">A quantum computing course that runs in the browser</p>
+            <p>Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks take you from a single qubit to quantum annealing, with nothing to install.</p>
+            <picture>
+              <!-- Still images for people who ask for reduced motion; the first matching source wins. -->
+              <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-dark.webp">
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/ketlab-light.webp">
+              <source media="(prefers-color-scheme: dark)" srcset="assets/img/projects/ketlab-demo-dark.gif">
+              <img class="shot" src="assets/img/projects/ketlab-demo-light.gif" width="1200" height="750" loading="lazy" alt="Recording of a Ket Lab lesson: typing qc.h(0) and qc.cx(0, 1) draws the circuit and moves the state to the Bell state; Check confirms it with a fidelity of 100%.">
+            </picture>
+            <ul class="refs">
+              <li><a href="https://orlandomotapires.github.io/ket-lab/">Open Ket Lab</a></li>
+              <li><a href="https://github.com/orlandomotapires/ket-lab">Code on GitHub</a></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="columns">
+      <div class="col col-a">
+        <section aria-labelledby="research">
+          <h2 id="research">Research</h2>
+
+          <article class="entry" id="fraunhofer" data-brick data-kind="milestone" data-date="2025-02" data-short="Joined Fraunhofer IPT" data-title="Student assistant at Fraunhofer IPT, Aachen">
+            <div class="when">2025 – 2026</div>
+            <div class="what">
+              <h3>Student assistant</h3>
+              <p class="org">Fraunhofer Institute for Production Technology IPT, Aachen</p>
+              <p>Applied the Quantum Approximate Optimization Algorithm and quantum annealing to graph partitioning, to make high-precision cutting simulations faster and more accurate.</p>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="when">2024</div>
+            <div class="what">
+              <h3>Research assistant</h3>
+              <p class="org">Quantum Industrial Innovation, Senai Cimatec, Salvador</p>
+              <p>Built the pipeline for the <a href="#p-fbiot">Facial Biosignals Time-Series Dataset (FBioT)</a>, which tracks facial feature movements for emotion recognition.</p>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="when">2024</div>
+            <div class="what">
+              <h3>Research assistant</h3>
+              <p class="org">Senai Cimatec, Salvador</p>
+              <p>Modeled EEG time series with Detrended Fluctuation Analysis to identify the pre-ictal (pre-seizure) state in patients with epilepsy.</p>
+              <ul class="refs">
+                <li><a href="#p-enmc">Paper (ENMC 2025)</a></li>
+                <li><a href="https://github.com/orlandomotapires/Seizures-analysis">Code on GitHub</a></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="when">2022 – 2023</div>
+            <div class="what">
+              <h3>Research assistant</h3>
+              <p class="org">Senai Cimatec HPC Center, Salvador</p>
+              <p>Showed how Data Parallel C++ (DPC++) can be used to write scientific computing codes for academia and industry, and wrote introductory Python notebooks on neural networks.</p>
+              <ul class="refs">
+                <li><a href="#p-jbth-dpcpp">Paper (JBTH 2023)</a></li>
+                <li><a href="https://github.com/muriloboratto/AI-university-assignments">Notebooks on GitHub</a></li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <section aria-labelledby="skills">
+          <h2 id="skills">Languages and tools</h2>
+
+          <div class="entry">
+            <div class="when">Languages</div>
+            <div class="what">Portuguese (native), English (C1), German (B2)</div>
+          </div>
+          <div class="entry">
+            <div class="when">Programming</div>
+            <div class="what">Python, C++, DPC++ / SYCL, Qiskit, PennyLane</div>
+          </div>
+          <div class="entry">
+            <div class="when">Tools</div>
+            <div class="what">Git, Docker, Linux</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col col-b">
+        <section aria-labelledby="publications">
+          <h2 id="publications">Publications</h2>
+
+          <article class="entry" id="p-enmc" data-brick data-kind="paper" data-date="2025-10" data-short="Seizure phases in EEG">
+            <div class="when">2025</div>
+            <div class="what">
+              <h3>Modeling Ictal Sentences Characterized by the Occurrence of Seizures in a Setting of Neurological Disorder</h3>
+              <p class="authors"><strong>Orlando Mota Pires</strong>, Adrian Widmer, Florêncio Mendes Oliveira Filho</p>
+              <p class="meta">XXVIII Encontro Nacional de Modelagem Computacional (ENMC)</p>
+              <ul class="refs">
+                <li><a href="assets/pdf/MISCOSSND.pdf">PDF</a></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="entry" id="p-fbiot" data-brick data-kind="paper" data-date="2024-12" data-short="FBioT facial biosignals dataset">
+            <div class="when">2024</div>
+            <div class="what">
+              <h3>Facial Biosignals Time–Series Dataset (FBioT): A Visual–Temporal Facial Expression Recognition (VT-FER) Approach</h3>
+              <p class="authors">João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, <strong>Orlando Mota Pires</strong>, Naiara Silva Bonfim dos Santos, Andre Brasil Vieira Wyzykowski, Oberdan Rocha Pinheiro, Daniel Gomes de Almeida Filho, Marcelo Oliveira da Silva, Josiane Dantas Viana Barbosa</p>
+              <p class="meta">Electronics 13(24), 4867</p>
+              <ul class="refs">
+                <li><a href="https://doi.org/10.3390/electronics13244867">doi:10.3390/electronics13244867</a></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="entry" id="p-cba" data-brick data-kind="paper" data-date="2024-10" data-short="Lip-reading event timing">
+            <div class="when">2024</div>
+            <div class="what">
+              <h3 lang="pt-BR">Protótipo de Correlação de Eventos de Leitura Labial com Medidas Temporais e Legendas</h3>
+              <p class="authors"><strong>Orlando Mota Pires</strong>, João Marcelo Silva Souza, Caroline da Silva M. Alves, Jés de Jesus F. Cerqueira, Wagner Luiz A. de Oliveira</p>
+              <p class="meta">XXV Congresso Brasileiro de Automática (CBA)</p>
+            </div>
+          </article>
+
+          <article class="entry" id="p-jbth-dpcpp" data-brick data-kind="paper" data-date="2023-02" data-short="DPC++ stencil tuning">
+            <div class="when">2023</div>
+            <div class="what">
+              <h3>Tuning a CPU-Based Stencil Computation in a DPC++ Multi-Device Environment</h3>
+              <p class="authors">Tiago Conceição Oliveira, Murilo Boratto, Antônio Horácio Rodrigues, <strong>Orlando Mota Pires</strong>, Leonardo Rodrigues Soares</p>
+              <p class="meta">Journal of Bioengineering, Technologies and Health 6(Suppl. 1), <span class="nowrap">24–30</span></p>
+              <ul class="refs">
+                <li><a href="https://doi.org/10.34178/jbth.v6iSuppl1.269">doi:10.34178/jbth.v6iSuppl1.269</a></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="entry" id="p-wscad" data-brick data-kind="paper" data-date="2022-10" data-short="Developer-centered oneAPI">
+            <div class="when">2022</div>
+            <div class="what">
+              <h3>OneAPI: an Approach for Developer-Centered Heterogeneous Computing</h3>
+              <p class="authors">T. Conceição, A. H. Rodrigues, <strong>O. Pires</strong>, L. Soares</p>
+              <p class="meta">WSCAD 2022</p>
+            </div>
+          </article>
+
+          <article class="entry" id="p-jbth-eco" data-brick data-kind="paper" data-date="2019-06" data-short="Eco-efficiency of compact cars">
+            <div class="when">2019</div>
+            <div class="what">
+              <h3>Statistical Study of Eco-Efficiency in Compact and Average Cars (Chevrolet, Ford, VW, Fiat, Renault) in Brazil Based on the Metro Table in 2019</h3>
+              <p class="authors">A. Wenceslau, A. Widmer, G. Dunkel, J. Samuel, <strong>O. Pires</strong>, A. Nascimento</p>
+              <p class="meta">Journal of Bioengineering, Technologies and Health</p>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <div class="col col-c">
+        <section aria-labelledby="teaching">
+          <h2 id="teaching">Teaching and community</h2>
+
+          <article class="entry" id="programming-club" data-brick data-kind="milestone" data-date="2021-09" data-short="Co-founded Programming Club" data-title="Co-founded the Programming Club at Senai Cimatec">
+            <div class="when">2021 – 2024</div>
+            <div class="what">
+              <h3>Co-founder, Programming Club</h3>
+              <p class="org">Senai Cimatec, Salvador</p>
+              <p>Taught algorithms and programming logic to engineering students, organized competitive programming marathons such as OBI and SBC, and ran the student initiative.</p>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="when">2023</div>
+            <div class="what">
+              <h3>Intel Student Ambassador</h3>
+              <p class="org">Senai Cimatec, Salvador</p>
+              <p>Ran workshops on Intel technologies for students at the university.</p>
+              <ul class="refs">
+                <li><a href="https://devmesh.intel.com/users/orlando-mota">Intel DevMesh profile</a></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="when">2022</div>
+            <div class="what">
+              <h3>Teaching assistant, Algorithms and Computational Thinking</h3>
+              <p class="org">Senai Cimatec, Salvador</p>
+              <p>Graded assignments and exams, and taught extra classes.</p>
+            </div>
+          </article>
+        </section>
+
+        <section aria-labelledby="education">
+          <h2 id="education">Education</h2>
+
+          <article class="entry" id="degree" data-brick data-kind="milestone" data-date="2026-08" data-short="Bachelor’s degree" data-title="Bachelor’s in Computer Engineering, Universidade Senai Cimatec">
+            <div class="when">2021 – 2026</div>
+            <div class="what">
+              <h3>Bachelor’s in Computer Engineering</h3>
+              <p class="org">Universidade Senai Cimatec, Salvador. <span class="nowrap">GPA 8.58 / 10</span>.</p>
+            </div>
+          </article>
+
+          <article class="entry" id="rwth" data-brick data-kind="milestone" data-date="2024-12" data-short="Exchange at RWTH Aachen" data-title="Exchange student at RWTH Aachen University">
+            <div class="when">2024 – 2026</div>
+            <div class="what">
+              <h3>Exchange student</h3>
+              <p class="org">RWTH Aachen University, Germany</p>
+            </div>
+          </article>
+
+          <article class="entry" id="juelich" data-brick data-kind="milestone" data-date="2025-09" data-short="Jülich summer school" data-title="JUNIQ-EPIQ Summer School on Quantum Computing, Jülich">
+            <div class="when">2025</div>
+            <div class="what">
+              <h3>JUNIQ-EPIQ Summer School on Quantum Computing</h3>
+              <p class="org">Jülich Supercomputing Centre, Germany</p>
+              <p>Solved max-cut and travelling salesman problems on gate-based quantum devices and quantum annealers.</p>
+              <ul class="refs">
+                <li><a href="assets/pdf/Teilnahmebest%C3%A4tigung%20Mota%20Pires.pdf">Certificate (PDF)</a></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="when">2014 – 2020</div>
+            <div class="what">
+              <h3>High school diploma</h3>
+              <p class="org">Colégio Cândido Portinari, Salvador</p>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+
+    <footer>
+      <p>Find me on <a href="https://www.linkedin.com/in/orlando-mota-0360a5209/">LinkedIn</a> or <a href="https://github.com/orlandomotapires">GitHub</a>, or download my <a href="assets/pdf/CV-OrlandoMota.pdf">CV</a>.</p>
+    </footer>
+  </main>
+
+  <script>
+    // The wall: one brick per element marked data-brick, laid oldest first
+    // (bottom row) in a running bond. To add one, give an entry data-brick,
+    // data-kind, data-date and data-short.
+    (function () {
+      var wall = document.getElementById('wall');
+      var legend = document.getElementById('wall-legend');
+      var sources = Array.prototype.slice.call(document.querySelectorAll('[data-brick]'));
+      if (!wall || !sources.length) return;
+
+      var bricks = sources.map(function (el, i) {
+        var heading = el.querySelector('h3');
+        var date = el.dataset.date || '';
+        return {
+          id: el.id,
+          date: date,
+          year: date.slice(0, 4),
+          short: el.dataset.short,
+          kind: el.dataset.kind || 'paper',
+          title: el.dataset.title || (heading ? heading.textContent.trim() : el.dataset.short),
+          order: i
+        };
+      }).sort(function (a, b) {
+        if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+        return a.order - b.order;
+      });
+
+      function perRow() {
+        return parseInt(getComputedStyle(wall).getPropertyValue('--per'), 10) || 4;
+      }
+
+      function makeBrick(b, i) {
+        var a = document.createElement('a');
+        a.className = 'brick ' + b.kind;
+        a.href = '#' + b.id;
+        a.title = b.title;
+        a.setAttribute('aria-label', b.title + ' (' + b.year + ')');
+        a.style.setProperty('--i', i);
+        var year = document.createElement('span');
+        year.className = 'brick-year';
+        year.textContent = b.year;
+        var title = document.createElement('span');
+        title.className = 'brick-title';
+        title.textContent = b.short;
+        a.appendChild(year);
+        a.appendChild(title);
+        return a;
+      }
+
+      var laidPer = 0;
+
+      function build(animate) {
+        var per = perRow();
+        laidPer = per;
+        var cells = bricks.map(makeBrick);
+        // An empty slot for the next brick, still to be laid.
+        var next = document.createElement('span');
+        next.className = 'brick next';
+        next.setAttribute('aria-hidden', 'true');
+        next.style.setProperty('--i', cells.length);
+        cells.push(next);
+
+        var rows = [];
+        for (var i = 0; i < cells.length; i += per) {
+          var row = document.createElement('div');
+          row.className = 'wall-row' + ((i / per) % 2 === 1 ? ' offset' : '');
+          cells.slice(i, i + per).forEach(function (c) { row.appendChild(c); });
+          rows.push(row);
+        }
+
+        wall.textContent = '';
+        wall.classList.toggle('laying', !!animate);
+        // Newest row on top.
+        rows.reverse().forEach(function (r) { wall.appendChild(r); });
+      }
+
+      wall.hidden = false;
+      legend.hidden = false;
+      build(true);
+
+      // Re-lay the wall when a breakpoint changes the number of bricks per row.
+      var pending = 0;
+      window.addEventListener('resize', function () {
+        if (pending) return;
+        pending = requestAnimationFrame(function () {
+          pending = 0;
+          if (perRow() !== laidPer) build(false);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
