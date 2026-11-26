@@ -11,6 +11,11 @@
 \usepackage{textcomp}
 \usepackage{newtxtext} % Times New Roman
 \usepackage{enumitem} % Para melhor controle das listas
+\usepackage{ragged2e}
+\hyphenpenalty=10000 \exhyphenpenalty=10000 % sem hifenização
+
+% Listas: alinhadas à esquerda (sem hifenização) e com o mesmo espaçamento em todas as entradas
+\setlist[itemize]{leftmargin=1.3em, topsep=0.2em, itemsep=0.15em, parsep=0pt, partopsep=0pt, before=\RaggedRight}
 
 % --- AJUSTE DAS MARGENS (Máximo aproveitamento) ---
 \geometry{left=0.5in, right=0.5in, top=0.5in, bottom=0.5in}
@@ -27,6 +32,14 @@
 % Links sublinhados, como nas versões anteriores
 \newcommand{\cvlink}[2]{\underline{\href{#1}{#2}}}
 
+% Entrada com o cargo primeiro: {cargo}{datas}{instituição}{local}{detalhes}
+% Linha 1: cargo em negrito, datas à direita. Linha 2: instituição em itálico, local à direita.
+\newcommand{\cvrole}[5]{\cventry[0.85em]{#4}{#3}{#1}{\mdseries #2}{}{#5}}
+
+% Publicação: {título}{autores}{veículo e links}
+\setlength{\listitemsymbolspace}{0.3em}
+\newcommand{\pub}[3]{\cvlistitem[0.7em]{\RaggedRight\textbf{#1}\\ #2\\ #3}}
+
 % --- INÍCIO DO DOCUMENTO ---
 \begin{document}
 
@@ -42,12 +55,11 @@ Looking for a research position in quantum computing and a master's programme.\\
 % --- SEÇÃO: FORMAÇÃO ACADÊMICA ---
 \section{Education}
 
-\cventry
-  {Feb 2021 -- Dec 2026}
+\cvrole
   {Bachelor's Degree in Computer Engineering}
+  {Feb 2021 -- Dec 2026}
   {Universidade Senai Cimatec}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
     \item GPA 8.58/10.00
@@ -55,20 +67,18 @@ Looking for a research position in quantum computing and a master's programme.\\
   \end{itemize}
   }
 
-\cventry
-  {Dec 2024 -- Aug 2026}
+\cvrole
   {Exchange Student}
+  {Dec 2024 -- Aug 2026}
   {RWTH Aachen University}
   {Aachen, Germany}
   {}
-  {}
 
-\cventry
-  {Sep 2025}
+\cvrole
   {JUNIQ-EPIQ Summer School on Quantum Computing}
+  {Sep 2025}
   {Jülich Supercomputing Centre (JSC)}
   {Jülich, Germany}
-  {}
   {
   \begin{itemize}
     \item Solved \cvlink{https://orlandomotapires.github.io/assets/pdf/Teilnahmebest\%C3\%A4tigung\%20Mota\%20Pires.pdf}{max-cut and travelling salesman problems} on gate-based quantum devices and quantum annealers.
@@ -78,12 +88,11 @@ Looking for a research position in quantum computing and a master's programme.\\
 % --- SEÇÃO: EXPERIÊNCIAS ---
 \section{Research Experience}
 
-\cventry
-  {Feb 2025 -- Sep 2026}
+\cvrole
   {Student Assistant}
+  {Feb 2025 -- Sep 2026}
   {Fraunhofer Institute for Production Technology IPT}
   {Aachen, Germany}
-  {}
   {
   \begin{itemize}
     \item Applied the Quantum Approximate Optimization Algorithm (QAOA) and quantum annealing to graph partitioning, to make high-precision cutting simulations faster and more accurate.
@@ -91,39 +100,36 @@ Looking for a research position in quantum computing and a master's programme.\\
   \end{itemize}
   }
 
-\cventry
-  {Mar 2024 -- Dec 2024}
+\cvrole
   {Research Assistant}
+  {Mar 2024 -- Dec 2024}
   {Quantum Industrial Innovation, Senai Cimatec}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
     \item Built the pipeline for the Facial Biosignals Time-Series Dataset (FBioT), which tracks facial feature movements for emotion recognition (\cvlink{https://doi.org/10.3390/electronics13244867}{paper}).
   \end{itemize}
   }
 
-\cventry
-  {Mar 2024 -- Dec 2024}
+\cvrole
   {Research Assistant}
+  {Mar 2024 -- Dec 2024}
   {Senai Cimatec}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
-    \item Modeled EEG time series with Detrended Fluctuation Analysis to identify the pre-ictal (pre-seizure) state in patients with epilepsy (\cvlink{https://orlandomotapires.github.io/assets/pdf/MISCOSSND.pdf}{paper}, \cvlink{https://github.com/orlandomotapires/Seizures-analysis}{code}).
+    \item Modelled EEG time series with Detrended Fluctuation Analysis to identify the pre-ictal (pre-seizure) state in patients with epilepsy (\cvlink{https://orlandomotapires.github.io/assets/pdf/MISCOSSND.pdf}{paper}, \cvlink{https://github.com/orlandomotapires/Seizures-analysis}{code}).
   \end{itemize}
   }
 
-\cventry
-  {Jan 2022 -- Dec 2023}
+\cvrole
   {Research Assistant}
+  {Jan 2022 -- Dec 2023}
   {Senai Cimatec HPC Center}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
-    \item Showed how Data Parallel C++ (DPC++) can be used to write scientific computing codes for academia and industry (\cvlink{https://doi.org/10.34178/jbth.v6iSuppl1.269}{paper}).
+    \item Tuned a CPU-based stencil computation with Data Parallel C++ (DPC++) on several devices (\cvlink{https://doi.org/10.34178/jbth.v6iSuppl1.269}{paper}).
     \item Co-wrote \cvlink{https://github.com/muriloboratto/AI-university-assignments}{introductory Python notebooks} on neural networks and artificial intelligence.
   \end{itemize}
   }
@@ -131,11 +137,10 @@ Looking for a research position in quantum computing and a master's programme.\\
 % --- SEÇÃO: PROJETOS ---
 \section{Software}
 
-\cventry
+\cvrole
+  {HDD Studio}
   {2025 -- 2026}
   {Hybrid domain decomposition, the software behind my thesis}
-  {HDD Studio}
-  {}
   {}
   {
   \begin{itemize}
@@ -143,11 +148,10 @@ Looking for a research position in quantum computing and a master's programme.\\
   \end{itemize}
   }
 
-\cventry
+\cvrole
+  {Ket Lab}
   {2026}
   {A quantum computing course that runs in the browser}
-  {Ket Lab}
-  {}
   {}
   {
   \begin{itemize}
@@ -159,36 +163,33 @@ Looking for a research position in quantum computing and a master's programme.\\
 \clearpage
 \section{Teaching and Community}
 
-\cventry
-  {Sep 2021 -- Dec 2024}
+\cvrole
   {Co-founder, Programming Club}
+  {Sep 2021 -- Dec 2024}
   {Senai Cimatec}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
-    \item Taught algorithms and programming logic to engineering students, organized competitive programming marathons such as OBI and SBC, and ran the student initiative.
+    \item Taught algorithms and programming logic to engineering students, organised competitive programming marathons such as OBI and SBC, and ran the student initiative.
   \end{itemize}
   }
 
-\cventry
-  {Mar 2023 -- Dec 2023}
+\cvrole
   {Intel Student Ambassador}
+  {Mar 2023 -- Dec 2023}
   {Senai Cimatec}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
     \item Ran workshops on Intel technologies for students at the university.
   \end{itemize}
   }
 
-\cventry
-  {Feb 2022 -- Dec 2022}
+\cvrole
   {Teaching Assistant, Algorithms and Computational Thinking}
+  {Feb 2022 -- Dec 2022}
   {Senai Cimatec}
   {Salvador, Brazil}
-  {}
   {
   \begin{itemize}
     \item Graded assignments and exams, and taught extra classes.
@@ -206,34 +207,28 @@ Looking for a research position in quantum computing and a master's programme.\\
 \section{Publications}
 \small
 
-\cvlistitem{\textbf{Modeling Ictal Sentences Characterized by the Occurrence of Seizures in a Setting of Neurological Disorder}
-\\ Orlando Mota Pires, Adrian Widmer, Florêncio Mendes Oliveira Filho
-\\ \textit{XXVIII Encontro Nacional de Modelagem Computacional (ENMC), 2025.} \href{https://orlandomotapires.github.io/assets/pdf/MISCOSSND.pdf}{PDF}
-}
+\pub{Modeling Ictal Sentences Characterized by the Occurrence of Seizures in a Setting of Neurological Disorder}
+{\textbf{Orlando Mota Pires}, Adrian Widmer, Florêncio Mendes Oliveira Filho}
+{\textit{XXVIII Encontro Nacional de Modelagem Computacional (ENMC), 2025.} \cvlink{https://orlandomotapires.github.io/assets/pdf/MISCOSSND.pdf}{PDF}}
 
-\cvlistitem{\textbf{Facial Biosignals Time-Series Dataset (FBioT): A Visual-Temporal Facial Expression Recognition (VT-FER) Approach}
-\\ João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, Orlando Mota Pires, Naiara Silva Bonfim dos Santos, Andre Brasil Vieira Wyzykowski, Oberdan Rocha Pinheiro, Daniel Gomes de Almeida Filho, Marcelo Oliveira da Silva and Josiane Dantas Viana Barbosa
-\\ \textit{Electronics 13(24), 4867, 2024.} \href{https://doi.org/10.3390/electronics13244867}{doi:10.3390/electronics13244867}
-}
+\pub{Facial Biosignals Time-Series Dataset (FBioT): A Visual-Temporal Facial Expression Recognition (VT-FER) Approach}
+{João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, \textbf{Orlando Mota Pires} et al.}
+{\textit{Electronics 13(24), 4867, 2024.} \cvlink{https://doi.org/10.3390/electronics13244867}{doi:10.3390/electronics13244867}}
 
-\cvlistitem{\textbf{Protótipo de Correlação de Eventos de Leitura Labial com Medidas Temporais e Legendas}
-\\ Orlando Mota Pires, João Marcelo Silva Souza, Caroline da Silva M. Alves, Jés de Jesus F. Cerqueira, Wagner Luiz A. de Oliveira
-\\ \textit{XXV Congresso Brasileiro de Automática (CBA), 2024.}
-}
+\pub{Protótipo de Correlação de Eventos de Leitura Labial com Medidas Temporais e Legendas}
+{\textbf{Orlando Mota Pires}, João Marcelo Silva Souza, Caroline da Silva M. Alves, Jés de Jesus F. Cerqueira, Wagner Luiz A. de Oliveira}
+{\textit{XXV Congresso Brasileiro de Automática (CBA), 2024.}}
 
-\cvlistitem{\textbf{Tuning a CPU-Based Stencil Computation in a DPC++ Multi-Device Environment}
-\\ Tiago Conceição Oliveira, Murilo Boratto, Antônio Horácio Rodrigues, Orlando Mota Pires, Leonardo Rodrigues Soares
-\\ \textit{Journal of Bioengineering, Technologies and Health 6(Suppl.\ 1), 24--30, 2023.} \href{https://doi.org/10.34178/jbth.v6iSuppl1.269}{doi:10.34178/jbth.v6iSuppl1.269}
-}
+\pub{Tuning a CPU-Based Stencil Computation in a DPC++ Multi-Device Environment}
+{Tiago Conceição Oliveira, Murilo Boratto, Antônio Horácio Rodrigues, \textbf{Orlando Mota Pires}, Leonardo Rodrigues Soares}
+{\textit{Journal of Bioengineering, Technologies and Health 6(Suppl.\ 1), 24--30, 2023.} \cvlink{https://doi.org/10.34178/jbth.v6iSuppl1.269}{doi:10.34178/jbth.v6iSuppl1.269}}
 
-\cvlistitem{\textbf{OneAPI: an Approach for Developer-Centered Heterogeneous Computing}
-\\ T. Conceição, A. H. Rodrigues, O. Pires, L. Soares
-\\ \textit{WSCAD, 2022.}
-}
+\pub{OneAPI: an Approach for Developer-Centered Heterogeneous Computing}
+{T. Conceição, A. H. Rodrigues, \textbf{O. Pires}, L. Soares}
+{\textit{WSCAD, 2022.}}
 
-\cvlistitem{\textbf{Statistical Study of Eco-Efficiency in Compact and Average Cars (Chevrolet, Ford, VW, Fiat, Renault) in Brazil Based on the Metro Table in 2019}
-\\ A. Wenceslau, A. Widmer, G. Dunkel, J. Samuel, O. Pires, A. Nascimento
-\\ \textit{Journal of Bioengineering, Technologies and Health, 2019.}
-}
+\pub{Statistical Study of Eco-Efficiency in Compact and Average Cars (Chevrolet, Ford, VW, Fiat, Renault) in Brazil Based on the Metro Table in 2019}
+{A. Wenceslau, A. Widmer, G. Dunkel, J. Samuel, \textbf{O. Pires}, A. Nascimento}
+{\textit{Journal of Bioengineering, Technologies and Health, 2019.}}
 
 \end{document}
