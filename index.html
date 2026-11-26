@@ -13,7 +13,7 @@
   <meta property="og:image" content="https://orlandomotapires.github.io/assets/img/og-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Orlando Mota Pires, computer engineer, with a wall of bricks for his papers, thesis, software and milestones.">
+  <meta property="og:image:alt" content="Orlando Mota Pires, computer engineer, with a wall of bricks for his papers, thesis and software.">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
@@ -61,8 +61,9 @@
       --brick-software: #AFC4E8;
       --brick-thesis: #2F5DA8;
       --brick-thesis-ink: #FFFFFF;
-      --brick-milestone-edge: #8F9BAD;
       --brick-hover: #C3D3EE;
+      --brick-plain: #E9EDF3;
+      --mortar: #C3CBD7;
     }
 
     /* Theme: follows the system unless the visitor picks one with the button,
@@ -82,8 +83,9 @@
         --brick-software: #3A5280;
         --brick-thesis: #8FB1EA;
         --brick-thesis-ink: #141A23;
-        --brick-milestone-edge: #66748A;
         --brick-hover: #30446A;
+        --brick-plain: #1D2534;
+        --mortar: #0B0F15;
       }
     }
     :root[data-theme="dark"] {
@@ -99,8 +101,9 @@
       --brick-software: #3A5280;
       --brick-thesis: #8FB1EA;
       --brick-thesis-ink: #141A23;
-      --brick-milestone-edge: #66748A;
       --brick-hover: #30446A;
+      --brick-plain: #1D2534;
+      --mortar: #0B0F15;
     }
 
     /* Images with a light and a dark version. */
@@ -254,37 +257,43 @@
 
     .wall {
       --per: 5;
-      --gap: 6px;
-      /* Sized so an offset row (half brick + per bricks) exactly fills the width. */
+      --gap: 5px;
+      /* Sized so a full row (per bricks + a half brick) exactly fills the width. */
       --w: calc((100% - (var(--per) - 0.5) * var(--gap)) / (var(--per) + 0.5));
       display: flex;
       flex-direction: column;
       gap: var(--gap);
-      padding-bottom: var(--gap);
+      /* Room for the mortar ring around the outer bricks. */
+      padding: 0 calc(var(--gap) / 2) calc(var(--gap) / 2);
       border-bottom: 2px solid var(--ink);
     }
 
+    /* Rows stay full width: brick widths are a % of the row. */
     .wall-row { display: flex; gap: var(--gap); }
-    /* Margin, not padding: brick widths are a % of the row, so the row must stay full width. */
     .wall-row.offset > :first-child { margin-left: calc(var(--w) / 2 + var(--gap) / 2); }
 
     .brick {
       flex: 0 0 var(--w);
       min-width: 0;
-      height: 4.5rem;
+      height: 4.1rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 0.45rem 0.65rem 0.5rem;
-      border-radius: 3px;
+      padding: 0.4rem 0.65rem 0.45rem;
       background: var(--brick-paper);
+      /* Square corners and a ring of mortar: the rings of neighbouring bricks
+         meet in the gaps, so the wall reads as one mass instead of loose boxes. */
+      box-shadow:
+        0 0 0 calc(var(--gap) / 2) var(--mortar),
+        inset 0 1px 0 rgb(255 255 255 / 0.14),
+        inset 0 -2px 0 rgb(0 0 0 / 0.14);
       color: var(--ink);
       font-size: 0.8125rem;
       line-height: 1.25;
       text-decoration: none;
       transition: background-color 0.15s ease, border-color 0.15s ease;
     }
-    .brick:hover { background: var(--brick-hover); }
+    a.brick:hover { background: var(--brick-hover); }
 
     .brick-year {
       color: var(--muted);
@@ -305,15 +314,17 @@
     .brick.thesis .brick-year { color: inherit; opacity: 0.8; }
     .brick.thesis:hover { filter: brightness(1.08); }
 
-    .brick.milestone {
-      background: transparent;
-      border: 1.5px solid var(--brick-milestone-edge);
+    /* Half bricks that square off the ends of the rows. */
+    .brick.plain {
+      flex-basis: calc(var(--w) / 2 - var(--gap) / 2);
+      padding: 0;
+      background: var(--brick-plain);
     }
-    .brick.milestone:hover { background: var(--mark); }
 
     .brick.next {
       background: transparent;
       border: 1.5px dashed var(--rule);
+      box-shadow: none;
     }
 
     .wall.laying .brick {
@@ -345,7 +356,6 @@
     .swatch.paper { background: var(--brick-paper); }
     .swatch.thesis { background: var(--brick-thesis); }
     .swatch.software { background: var(--brick-software); }
-    .swatch.milestone { border: 1.5px solid var(--brick-milestone-edge); }
 
     @media (min-width: 1200px) {
       .wall { --per: 4; }
@@ -356,7 +366,7 @@
         column-gap: 4.5rem;
         align-items: end;
       }
-      .wall-wrap { margin-top: 0; }
+      .wall-wrap { width: 85%; margin: 0 0 0 auto; }
       .statement { padding-bottom: 2.6rem; }
     }
 
@@ -384,7 +394,13 @@
     }
     @media (min-width: 1100px) {
       .featured .entries { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      /* Side by side, the three pictures share one frame so they line up. */
+      .featured .shot { aspect-ratio: 16 / 10; object-fit: contain; }
     }
+    /* The picture leads each entry, above the date and title. */
+    .featured .media { grid-column: 1 / -1; margin-bottom: 0.9rem; }
+    .featured .shot { margin: 0; }
+    .shot.on-white { background: #FFFFFF; }
 
     /* Research | Publications | Teaching, education and skills */
     .columns {
@@ -505,6 +521,7 @@
       .brickwork { margin-top: 3rem; }
       .wall { --per: 3; --gap: 4px; }
       .brick { font-size: 0.7rem; height: 4.4rem; padding: 0.35rem 0.4rem; }
+      .brick.plain { padding: 0; }
       .brick-title { -webkit-line-clamp: 3; }
       .entry { margin: 0 -0.5rem; padding: 0.75rem 0.5rem; }
       .featured { margin-top: 3.5rem; }
@@ -550,15 +567,13 @@
 
       <div class="wall-wrap">
         <!-- Built by the script at the bottom from every element marked data-brick:
-             data-kind (paper, thesis, software, milestone), data-date (YYYY-MM, for order),
+             data-kind (paper, thesis, software), data-date (YYYY-MM, for order),
              data-short (brick label) and optionally data-title (tooltip). -->
         <nav class="wall" id="wall" aria-label="My work so far, oldest at the bottom" hidden></nav>
         <ul class="wall-legend" id="wall-legend" hidden>
-          <li>My bricks so far, oldest at the bottom:</li>
           <li><span class="swatch paper"></span>Paper</li>
           <li><span class="swatch thesis"></span>Thesis</li>
           <li><span class="swatch software"></span>Software</li>
-          <li><span class="swatch milestone"></span>Milestone</li>
         </ul>
       </div>
     </div>
@@ -566,13 +581,15 @@
     <section class="featured" aria-labelledby="featured-heading">
       <h2 id="featured-heading">Thesis and software</h2>
       <div class="entries">
-        <article class="entry" id="thesis" data-brick data-kind="thesis" data-date="2026-08" data-short="Thesis: quantum graph partitioning">
+        <article class="entry" id="thesis" data-brick data-kind="thesis" data-date="2026-08" data-short="Thesis: quantum partitioning">
+          <div class="media">
+            <img class="shot on-white" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part.">
+          </div>
           <div class="when">2026</div>
           <div class="what">
             <h3>Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition</h3>
             <p class="org">Bachelor’s thesis, Universidade Senai Cimatec. Supervised by MSc. Stefan Schröder and Dr. Anderson Buarque.</p>
             <p>A method and implementation for partitioning simulation domains with a hybrid quantum–classical algorithm, applied to manufacturing simulations at Fraunhofer IPT. On the first of two ANSYS blade models, the best run cut the worst-case number of solver iterations by about 64%. On the denser second model, the cut was 1.2%.</p>
-            <img class="shot on-white" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part.">
             <ul class="refs">
               <li><a href="assets/pdf/Hybrid_Quantum_Classical_Graph_Partitioning_Algorithm_for_Domain_Decomposition.pdf">Thesis (PDF, 4.6 MB)</a></li>
               <li><a href="#hdd-studio">The software: HDD Studio</a></li>
@@ -581,15 +598,17 @@
         </article>
 
         <article class="entry" id="hdd-studio" data-brick data-kind="software" data-date="2025-10" data-short="HDD Studio">
+          <div class="media">
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/hdd-studio.webp">
+              <img class="shot" src="assets/img/projects/hdd-studio-demo.webp" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
+            </picture>
+          </div>
           <div class="when">2025 – 2026</div>
           <div class="what">
             <h3>HDD Studio</h3>
             <p class="org">Hybrid domain decomposition, the software behind my thesis</p>
             <p>A desktop app and command-line tool that reorders any square sparse matrix into diagonal blocks, by partitioning its graph with METIS, quantum annealing or QAOA, locally or on D-Wave and QLM quantum hardware.</p>
-            <picture>
-              <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/hdd-studio.webp">
-              <img class="shot" src="assets/img/projects/hdd-studio-demo.webp" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
-            </picture>
             <ul class="refs">
               <li><a href="https://github.com/orlandomotapires/hybrid_domain_decomposition">Code on GitHub</a></li>
             </ul>
@@ -597,11 +616,7 @@
         </article>
 
         <article class="entry" id="ket-lab" data-brick data-kind="software" data-date="2026-11" data-short="Ket Lab">
-          <div class="when">2026</div>
-          <div class="what">
-            <h3>Ket Lab</h3>
-            <p class="org">A quantum computing course that runs in the browser</p>
-            <p>Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks take you from a single qubit to quantum annealing, with nothing to install.</p>
+          <div class="media">
             <!-- One recording per theme; each falls back to a still image for reduced motion. -->
             <picture class="only-light">
               <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/ketlab-light.webp">
@@ -611,6 +626,12 @@
               <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/ketlab-dark.webp">
               <img class="shot" src="assets/img/projects/ketlab-demo-dark.webp" width="1200" height="750" loading="lazy" alt="Recording of a Ket Lab lesson: typing qc.h(0) and qc.cx(0, 1) draws the circuit and moves the state to the Bell state; Check confirms it with a fidelity of 100%.">
             </picture>
+          </div>
+          <div class="when">2026</div>
+          <div class="what">
+            <h3>Ket Lab</h3>
+            <p class="org">A quantum computing course that runs in the browser</p>
+            <p>Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks take you from a single qubit to quantum annealing, with nothing to install.</p>
             <ul class="refs">
               <li><a href="https://orlandomotapires.github.io/ket-lab/">Open Ket Lab</a></li>
               <li><a href="https://github.com/orlandomotapires/ket-lab">Code on GitHub</a></li>
@@ -625,7 +646,7 @@
         <section aria-labelledby="research">
           <h2 id="research">Research</h2>
 
-          <article class="entry" id="fraunhofer" data-brick data-kind="milestone" data-date="2025-02" data-short="Joined Fraunhofer IPT" data-title="Student assistant at Fraunhofer IPT, Aachen">
+          <article class="entry" id="fraunhofer">
             <div class="when">2025 – 2026</div>
             <div class="what">
               <h3>Student assistant</h3>
@@ -744,7 +765,7 @@
         <section aria-labelledby="education">
           <h2 id="education">Education</h2>
 
-          <article class="entry" id="degree" data-brick data-kind="milestone" data-date="2026-08" data-short="Bachelor’s degree" data-title="Bachelor’s in Computer Engineering, Universidade Senai Cimatec">
+          <article class="entry" id="degree">
             <div class="when">2021 – 2026</div>
             <div class="what">
               <h3>Bachelor’s in Computer Engineering</h3>
@@ -752,7 +773,7 @@
             </div>
           </article>
 
-          <article class="entry" id="rwth" data-brick data-kind="milestone" data-date="2024-12" data-short="Exchange at RWTH Aachen" data-title="Exchange student at RWTH Aachen University">
+          <article class="entry" id="rwth">
             <div class="when">2024 – 2026</div>
             <div class="what">
               <h3>Exchange student</h3>
@@ -760,7 +781,7 @@
             </div>
           </article>
 
-          <article class="entry" id="juelich" data-brick data-kind="milestone" data-date="2025-09" data-short="Jülich summer school" data-title="JUNIQ-EPIQ Summer School on Quantum Computing, Jülich">
+          <article class="entry" id="juelich">
             <div class="when">2025</div>
             <div class="what">
               <h3>JUNIQ-EPIQ Summer School on Quantum Computing</h3>
@@ -784,7 +805,7 @@
         <section aria-labelledby="teaching">
           <h2 id="teaching">Teaching and community</h2>
 
-          <article class="entry" id="programming-club" data-brick data-kind="milestone" data-date="2021-09" data-short="Co-founded Programming Club" data-title="Co-founded the Programming Club at Senai Cimatec">
+          <article class="entry" id="programming-club">
             <div class="when">2021 – 2024</div>
             <div class="what">
               <h3>Co-founder, Programming Club</h3>
@@ -914,11 +935,26 @@
         next.style.setProperty('--i', cells.length);
         cells.push(next);
 
+        function half(i) {
+          var h = document.createElement('span');
+          h.className = 'brick plain';
+          h.setAttribute('aria-hidden', 'true');
+          h.style.setProperty('--i', i);
+          return h;
+        }
+
+        // Running bond: full rows are squared off with a half brick at one end,
+        // alternating sides. The unfinished top row is just shifted instead.
         var rows = [];
         for (var i = 0; i < cells.length; i += per) {
           var row = document.createElement('div');
-          row.className = 'wall-row' + ((i / per) % 2 === 1 ? ' offset' : '');
-          cells.slice(i, i + per).forEach(function (c) { row.appendChild(c); });
+          var offset = (i / per) % 2 === 1;
+          var slice = cells.slice(i, i + per);
+          var full = slice.length === per;
+          row.className = 'wall-row' + (offset && !full ? ' offset' : '');
+          if (offset && full) row.appendChild(half(i));
+          slice.forEach(function (c) { row.appendChild(c); });
+          if (!offset && full) row.appendChild(half(i + per - 1));
           rows.push(row);
         }
 
