@@ -1,0 +1,238 @@
+\documentclass[11pt, a4paper, sans]{moderncv}
+
+% --- ESTILO DE ECONOMIA DE ESPAÇO ---
+% O estilo 'banking' remove a coluna lateral de datas e usa a largura total
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{textcomp}
+\usepackage{enumitem} % Para melhor controle das listas
+
+% --- AJUSTE DAS MARGENS (Máximo aproveitamento) ---
+\geometry{left=0.5in, right=0.5in, top=0.5in, bottom=0.5in}
+
+% --- DADOS PESSOAIS ---
+\firstname{Orlando}
+\familyname{Mota Pires}
+
+\email{orlandomota2002@gmail.com}
+\social[linkedin]{orlando-mota-0360a5209}
+\social[github]{orlandomotapires}
+\homepage{https://orlandomotapires.github.io}
+
+% Links sublinhados, como nas versões anteriores
+\newcommand{\cvlink}[2]{\underline{\href{#1}{#2}}}
+
+% --- INÍCIO DO DOCUMENTO ---
+\begin{document}
+
+% --- CABEÇALHO ---
+\makecvtitle
+\vspace*{-3.0em} % Reduz o espaço logo após o título
+\begin{center}
+Computer engineer working on hybrid quantum--classical algorithms, high-performance computing and biosignals.\\
+Looking for a research position in quantum computing and a master's programme.\\[0.4em]
+\textbf{Portuguese}: Native \quad | \quad \textbf{English}: C1 \quad | \quad \textbf{German}: B2
+\end{center}
+
+% --- SEÇÃO: FORMAÇÃO ACADÊMICA ---
+\section{Education}
+
+\cventry
+  {Feb 2021 -- Aug 2026}
+  {Bachelor's Degree in Computer Engineering}
+  {Universidade Senai Cimatec}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item GPA 8.58/10.00
+    \item Thesis: \cvlink{https://orlandomotapires.github.io/assets/pdf/Hybrid_Quantum_Classical_Graph_Partitioning_Algorithm_for_Domain_Decomposition.pdf}{Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition}, carried out at Fraunhofer IPT. Supervised by MSc.\ Stefan Schröder and Dr.\ Anderson Buarque.
+  \end{itemize}
+  }
+
+\cventry
+  {Dec 2024 -- Aug 2026}
+  {Exchange Student}
+  {RWTH Aachen University}
+  {Aachen, Germany}
+  {}
+  {}
+
+\cventry
+  {Sep 2025}
+  {JUNIQ-EPIQ Summer School on Quantum Computing}
+  {Jülich Supercomputing Centre (JSC)}
+  {Jülich, Germany}
+  {}
+  {
+  \begin{itemize}
+    \item Solved \cvlink{https://orlandomotapires.github.io/assets/pdf/Teilnahmebest\%C3\%A4tigung\%20Mota\%20Pires.pdf}{max-cut and travelling salesman problems} on gate-based quantum devices and quantum annealers.
+  \end{itemize}
+  }
+
+% --- SEÇÃO: EXPERIÊNCIAS ---
+\section{Research Experience}
+
+\cventry
+  {Feb 2025 -- 2026}
+  {Student Assistant}
+  {Fraunhofer Institute for Production Technology IPT}
+  {Aachen, Germany}
+  {}
+  {
+  \begin{itemize}
+    \item Applied the Quantum Approximate Optimization Algorithm (QAOA) and quantum annealing to graph partitioning, to make high-precision cutting simulations faster and more accurate.
+    \item On the first of two ANSYS blade models, the best run cut the worst-case number of solver iterations by about 64\%.
+  \end{itemize}
+  }
+
+\cventry
+  {Mar 2024 -- Dec 2024}
+  {Research Assistant}
+  {Quantum Industrial Innovation, Senai Cimatec}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item Built the pipeline for the Facial Biosignals Time-Series Dataset (FBioT), which tracks facial feature movements for emotion recognition (\cvlink{https://doi.org/10.3390/electronics13244867}{paper}).
+  \end{itemize}
+  }
+
+\cventry
+  {Mar 2024 -- Dec 2024}
+  {Research Assistant}
+  {Senai Cimatec}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item Modeled EEG time series with Detrended Fluctuation Analysis to identify the pre-ictal (pre-seizure) state in patients with epilepsy (\cvlink{https://orlandomotapires.github.io/assets/pdf/MISCOSSND.pdf}{paper}, \cvlink{https://github.com/orlandomotapires/Seizures-analysis}{code}).
+  \end{itemize}
+  }
+
+\cventry
+  {Jan 2022 -- Dec 2023}
+  {Research Assistant}
+  {Senai Cimatec HPC Center}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item Showed how Data Parallel C++ (DPC++) can be used to write scientific computing codes for academia and industry (\cvlink{https://doi.org/10.34178/jbth.v6iSuppl1.269}{paper}).
+    \item Wrote \cvlink{https://github.com/muriloboratto/AI-university-assignments}{introductory Python notebooks} on neural networks and artificial intelligence.
+  \end{itemize}
+  }
+
+% --- SEÇÃO: PROJETOS ---
+\section{Software}
+
+\cventry
+  {2025 -- 2026}
+  {Hybrid domain decomposition, the software behind my thesis}
+  {HDD Studio}
+  {}
+  {}
+  {
+  \begin{itemize}
+    \item A desktop app and command-line tool that reorders any square sparse matrix into diagonal blocks, by partitioning its graph with METIS, quantum annealing or QAOA, locally or on D-Wave and QLM quantum hardware (\cvlink{https://github.com/orlandomotapires/hybrid_domain_decomposition}{code}).
+  \end{itemize}
+  }
+
+\cventry
+  {2026}
+  {A quantum computing course that runs in the browser}
+  {Ket Lab}
+  {}
+  {}
+  {
+  \begin{itemize}
+    \item Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks, from a single qubit to quantum annealing (\cvlink{https://orlandomotapires.github.io/ket-lab/}{open}, \cvlink{https://github.com/orlandomotapires/ket-lab}{code}).
+  \end{itemize}
+  }
+
+% --- SEÇÃO: ENSINO ---
+\clearpage
+\section{Teaching and Community}
+
+\cventry
+  {Sep 2021 -- Dec 2024}
+  {Co-founder, Programming Club}
+  {Senai Cimatec}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item Taught algorithms and programming logic to engineering students, organized competitive programming marathons such as OBI and SBC, and ran the student initiative.
+  \end{itemize}
+  }
+
+\cventry
+  {Mar 2023 -- Dec 2023}
+  {Intel Student Ambassador}
+  {Senai Cimatec}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item Ran workshops on Intel technologies for students at the university.
+  \end{itemize}
+  }
+
+\cventry
+  {Feb 2022 -- Dec 2022}
+  {Teaching Assistant, Algorithms and Computational Thinking}
+  {Senai Cimatec}
+  {Salvador, Brazil}
+  {}
+  {
+  \begin{itemize}
+    \item Graded assignments and exams, and taught extra classes.
+  \end{itemize}
+  }
+
+% --- SEÇÃO: HABILIDADES ---
+\section{Skills}
+
+\cvitem{Programming}{Python, C++, DPC++ / SYCL, Qiskit, PennyLane}
+\cvitem{Quantum}{QAOA, quantum annealing, D-Wave, QLM}
+\cvitem{Tools}{Git, Docker, Linux}
+
+% --- SEÇÃO: PUBLICAÇÕES ---
+\section{Publications}
+\small
+
+\cvlistitem{\textbf{Modeling Ictal Sentences Characterized by the Occurrence of Seizures in a Setting of Neurological Disorder}
+\\ Orlando Mota Pires, Adrian Widmer, Florêncio Mendes Oliveira Filho
+\\ \textit{XXVIII Encontro Nacional de Modelagem Computacional (ENMC), 2025.} \href{https://orlandomotapires.github.io/assets/pdf/MISCOSSND.pdf}{PDF}
+}
+
+\cvlistitem{\textbf{Facial Biosignals Time-Series Dataset (FBioT): A Visual-Temporal Facial Expression Recognition (VT-FER) Approach}
+\\ João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, Orlando Mota Pires, Naiara Silva Bonfim dos Santos, Andre Brasil Vieira Wyzykowski, Oberdan Rocha Pinheiro, Daniel Gomes de Almeida Filho, Marcelo Oliveira da Silva and Josiane Dantas Viana Barbosa
+\\ \textit{Electronics 13(24), 4867, 2024.} \href{https://doi.org/10.3390/electronics13244867}{doi:10.3390/electronics13244867}
+}
+
+\cvlistitem{\textbf{Protótipo de Correlação de Eventos de Leitura Labial com Medidas Temporais e Legendas}
+\\ Orlando Mota Pires, João Marcelo Silva Souza, Caroline da Silva M. Alves, Jés de Jesus F. Cerqueira, Wagner Luiz A. de Oliveira
+\\ \textit{XXV Congresso Brasileiro de Automática (CBA), 2024.}
+}
+
+\cvlistitem{\textbf{Tuning a CPU-Based Stencil Computation in a DPC++ Multi-Device Environment}
+\\ Tiago Conceição Oliveira, Murilo Boratto, Antônio Horácio Rodrigues, Orlando Mota Pires, Leonardo Rodrigues Soares
+\\ \textit{Journal of Bioengineering, Technologies and Health 6(Suppl.\ 1), 24--30, 2023.} \href{https://doi.org/10.34178/jbth.v6iSuppl1.269}{doi:10.34178/jbth.v6iSuppl1.269}
+}
+
+\cvlistitem{\textbf{OneAPI: an Approach for Developer-Centered Heterogeneous Computing}
+\\ T. Conceição, A. H. Rodrigues, O. Pires, L. Soares
+\\ \textit{WSCAD, 2022.}
+}
+
+\cvlistitem{\textbf{Statistical Study of Eco-Efficiency in Compact and Average Cars (Chevrolet, Ford, VW, Fiat, Renault) in Brazil Based on the Metro Table in 2019}
+\\ A. Wenceslau, A. Widmer, G. Dunkel, J. Samuel, O. Pires, A. Nascimento
+\\ \textit{Journal of Bioengineering, Technologies and Health, 2019.}
+}
+
+\end{document}
