@@ -12,6 +12,7 @@
 \usepackage{newtxtext} % Times New Roman
 \usepackage{enumitem} % Para melhor controle das listas
 \usepackage{ragged2e}
+\usepackage{needspace}
 \hyphenpenalty=10000 \exhyphenpenalty=10000 % sem hifenização
 
 % Listas: alinhadas à esquerda (sem hifenização) e com o mesmo espaçamento em todas as entradas
@@ -34,7 +35,7 @@
 
 % Entrada com o cargo primeiro: {cargo}{datas}{instituição}{local}{detalhes}
 % Linha 1: cargo em negrito, datas à direita. Linha 2: instituição em itálico, local à direita.
-\newcommand{\cvrole}[5]{\cventry[0.85em]{#4}{#3}{#1}{\mdseries #2}{}{#5}}
+\newcommand{\cvrole}[5]{\needspace{5\baselineskip}\cventry[0.85em]{#4}{#3}{#1}{\mdseries #2}{}{#5}}
 
 % Publicação: {título}{autores}{veículo e links}
 \setlength{\listitemsymbolspace}{0.3em}
@@ -134,7 +135,15 @@ Looking for a research position in quantum computing and a master's programme.\\
   \end{itemize}
   }
 
+% --- SEÇÃO: HABILIDADES ---
+\section{Skills}
+
+\cvitem{Programming}{Python, C++, DPC++ / SYCL, Qiskit, PennyLane}
+\cvitem{Quantum}{QAOA, quantum annealing, D-Wave, QLM}
+\cvitem{Tools}{Git, Docker, Linux}
+
 % --- SEÇÃO: PROJETOS ---
+\clearpage
 \section{Software}
 
 \cvrole
@@ -159,8 +168,18 @@ Looking for a research position in quantum computing and a master's programme.\\
   \end{itemize}
   }
 
+\cvrole
+  {CUDA Laplacian filter}
+  {2023}
+  {HPC hackathon, Fundamentals of Parallel Programming course}
+  {}
+  {
+  \begin{itemize}
+    \item Wrote the CUDA kernels for one and two GPUs (NCCL) and measured the run times. On a 46340 $\times$ 46340 input, the GPU version ran 19.68$\times$ faster than the sequential code (\cvlink{https://github.com/orlandomotapires/hackaton_fpp}{code}).
+  \end{itemize}
+  }
+
 % --- SEÇÃO: ENSINO ---
-\clearpage
 \section{Teaching and Community}
 
 \cvrole
@@ -195,13 +214,6 @@ Looking for a research position in quantum computing and a master's programme.\\
     \item Graded assignments and exams, and taught extra classes.
   \end{itemize}
   }
-
-% --- SEÇÃO: HABILIDADES ---
-\section{Skills}
-
-\cvitem{Programming}{Python, C++, DPC++ / SYCL, Qiskit, PennyLane}
-\cvitem{Quantum}{QAOA, quantum annealing, D-Wave, QLM}
-\cvitem{Tools}{Git, Docker, Linux}
 
 % --- SEÇÃO: PUBLICAÇÕES ---
 \section{Publications}
