@@ -476,6 +476,72 @@
     .authors { font-size: 0.9375rem; }
     .authors strong { font-weight: 600; }
 
+    /* Descriptions sit behind an "i" next to the title: shown on hover or
+       keyboard focus, and toggled by a tap or click. */
+    .what { position: relative; }
+    .more-btn {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 1.15em;
+      height: 1.15em;
+      margin-left: 0.15em;
+      padding: 0;
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      background: none;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.75em;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      vertical-align: 0.15em;
+      cursor: pointer;
+    }
+    /* A larger invisible hit area for fingers. */
+    .more-btn::after { content: ""; position: absolute; inset: -0.6rem; }
+    .more-btn:hover, .more.open .more-btn { color: var(--accent); }
+    /* In a shortened author list the "…" opens the full list. */
+    .more-btn.dots {
+      width: auto;
+      height: auto;
+      margin: 0;
+      padding: 0 0.1em;
+      border: 0;
+      border-radius: 2px;
+      color: var(--accent);
+      font-size: 1em;
+      font-style: normal;
+      font-weight: 600;
+      vertical-align: baseline;
+    }
+    .more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .more-text {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      margin-top: 0.35rem;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      background: var(--paper);
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.14);
+      color: var(--ink);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    /* A transparent strip so the pointer can travel from the "i" to the text. */
+    .more-text::before { content: ""; position: absolute; left: 0; right: 0; top: -0.5rem; height: 0.5rem; }
+    .more:focus-within .more-text,
+    .more.open .more-text { display: block; }
+    @media (hover: hover) {
+      .more:hover .more-text { display: block; }
+    }
+
     .refs {
       display: flex;
       flex-wrap: wrap;
@@ -583,13 +649,14 @@
       <div class="entries">
         <article class="entry" id="thesis" data-brick data-kind="thesis" data-date="2026-08" data-short="Thesis: quantum partitioning">
           <div class="media">
-            <img class="shot on-white" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part.">
+            <!-- One version per theme. -->
+            <picture class="only-light"><img class="shot on-white" src="assets/img/projects/hdd-reordering.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part."></picture>
+            <picture class="only-dark"><img class="shot" src="assets/img/projects/hdd-reordering-dark.webp" width="1320" height="616" loading="lazy" alt="A sparse matrix before and after reordering: scattered nonzeros become six coloured diagonal blocks, one per part."></picture>
           </div>
           <div class="when">2026</div>
           <div class="what">
-            <h3>Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition</h3>
+            <h3>Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Hybrid Quantum-Classical Graph Partitioning Algorithm for Domain Decomposition">i</button><span class="more-text">A method and implementation for partitioning simulation domains with a hybrid quantum–classical algorithm, applied to manufacturing simulations at Fraunhofer IPT. On the first of two ANSYS blade models, the best run cut the worst-case number of solver iterations by about 64%. On the denser second model, the cut was 1.2%.</span></span></h3>
             <p class="org">Bachelor’s thesis, Universidade Senai Cimatec. Supervised by MSc. Stefan Schröder and Dr. Anderson Buarque.</p>
-            <p>A method and implementation for partitioning simulation domains with a hybrid quantum–classical algorithm, applied to manufacturing simulations at Fraunhofer IPT. On the first of two ANSYS blade models, the best run cut the worst-case number of solver iterations by about 64%. On the denser second model, the cut was 1.2%.</p>
             <ul class="refs">
               <li><a href="assets/pdf/Hybrid_Quantum_Classical_Graph_Partitioning_Algorithm_for_Domain_Decomposition.pdf">Thesis (PDF, 4.6 MB)</a></li>
               <li><a href="#hdd-studio">The software: HDD Studio</a></li>
@@ -599,16 +666,20 @@
 
         <article class="entry" id="hdd-studio" data-brick data-kind="software" data-date="2025-10" data-short="HDD Studio">
           <div class="media">
-            <picture>
+            <!-- One recording per theme; each falls back to a still image for reduced motion. -->
+            <picture class="only-light">
               <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/hdd-studio.webp">
               <img class="shot" src="assets/img/projects/hdd-studio-demo.webp" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
+            </picture>
+            <picture class="only-dark">
+              <source media="(prefers-reduced-motion: reduce)" srcset="assets/img/projects/hdd-studio-dark.webp">
+              <img class="shot" src="assets/img/projects/hdd-studio-demo-dark.webp" width="1040" height="650" loading="lazy" alt="Recording of HDD Studio: a simulation runs, its log streams in the console, and the reordered matrix and locality curve open; then the coarsening settings are changed and the per-level preview updates.">
             </picture>
           </div>
           <div class="when">2025 – 2026</div>
           <div class="what">
-            <h3>HDD Studio</h3>
+            <h3>HDD Studio <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: HDD Studio">i</button><span class="more-text">A desktop app and command-line tool that reorders any square sparse matrix into diagonal blocks, by partitioning its graph with METIS, quantum annealing or QAOA, locally or on D-Wave and QLM quantum hardware.</span></span></h3>
             <p class="org">Hybrid domain decomposition, the software behind my thesis</p>
-            <p>A desktop app and command-line tool that reorders any square sparse matrix into diagonal blocks, by partitioning its graph with METIS, quantum annealing or QAOA, locally or on D-Wave and QLM quantum hardware.</p>
             <ul class="refs">
               <li><a href="https://github.com/orlandomotapires/hybrid_domain_decomposition">Code on GitHub</a></li>
             </ul>
@@ -629,9 +700,8 @@
           </div>
           <div class="when">2026</div>
           <div class="what">
-            <h3>Ket Lab</h3>
+            <h3>Ket Lab <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Ket Lab">i</button><span class="more-text">Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks take you from a single qubit to quantum annealing, with nothing to install.</span></span></h3>
             <p class="org">A quantum computing course that runs in the browser</p>
-            <p>Write Qiskit or PennyLane code and watch the quantum state change line by line. 53 lessons in 7 tracks take you from a single qubit to quantum annealing, with nothing to install.</p>
             <ul class="refs">
               <li><a href="https://orlandomotapires.github.io/ket-lab/">Open Ket Lab</a></li>
               <li><a href="https://github.com/orlandomotapires/ket-lab">Code on GitHub</a></li>
@@ -651,7 +721,7 @@
             <div class="what">
               <h3>Student assistant</h3>
               <p class="org">Fraunhofer Institute for Production Technology IPT, Aachen</p>
-              <p>Applied the Quantum Approximate Optimization Algorithm and quantum annealing to graph partitioning, to make high-precision cutting simulations faster and more accurate.</p>
+              <p>Applied the Quantum Approximate Optimization Algorithm and quantum annealing to graph partitioning, to make high-precision cutting simulations faster and more accurate. This work became my <a href="#thesis">bachelor’s thesis</a> and the <a href="#hdd-studio">HDD Studio</a> software.</p>
             </div>
           </article>
 
@@ -667,9 +737,8 @@
           <article class="entry">
             <div class="when">2024</div>
             <div class="what">
-              <h3>Research assistant</h3>
+              <h3>Research assistant <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Research assistant">i</button><span class="more-text">Modeled EEG time series with Detrended Fluctuation Analysis to identify the pre-ictal (pre-seizure) state in patients with epilepsy.</span></span></h3>
               <p class="org">Senai Cimatec, Salvador</p>
-              <p>Modeled EEG time series with Detrended Fluctuation Analysis to identify the pre-ictal (pre-seizure) state in patients with epilepsy.</p>
               <ul class="refs">
                 <li><a href="#p-enmc">Paper (ENMC 2025)</a></li>
                 <li><a href="https://github.com/orlandomotapires/Seizures-analysis">Code on GitHub</a></li>
@@ -680,9 +749,8 @@
           <article class="entry">
             <div class="when">2022 – 2023</div>
             <div class="what">
-              <h3>Research assistant</h3>
+              <h3>Research assistant <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Research assistant">i</button><span class="more-text">Showed how Data Parallel C++ (DPC++) can be used to write scientific computing codes for academia and industry, and co-wrote introductory Python notebooks on neural networks.</span></span></h3>
               <p class="org">Senai Cimatec HPC Center, Salvador</p>
-              <p>Showed how Data Parallel C++ (DPC++) can be used to write scientific computing codes for academia and industry, and co-wrote introductory Python notebooks on neural networks.</p>
               <ul class="refs">
                 <li><a href="#p-jbth-dpcpp">Paper (JBTH 2023)</a></li>
                 <li><a href="https://github.com/muriloboratto/AI-university-assignments">Notebooks on GitHub</a></li>
@@ -712,7 +780,7 @@
             <div class="when">2024</div>
             <div class="what">
               <h3>Facial Biosignals Time–Series Dataset (FBioT): A Visual–Temporal Facial Expression Recognition (VT-FER) Approach</h3>
-              <p class="authors">João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, <strong>Orlando Mota Pires</strong>, Naiara Silva Bonfim dos Santos, Andre Brasil Vieira Wyzykowski, Oberdan Rocha Pinheiro, Daniel Gomes de Almeida Filho, Marcelo Oliveira da Silva, Josiane Dantas Viana Barbosa</p>
+              <p class="authors"><span class="more">João Marcelo Silva Souza, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 11 authors">…</button>, <strong>Orlando Mota Pires</strong>, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 11 authors">…</button><span class="more-text">João Marcelo Silva Souza, Caroline da Silva Morais Alves, Jés de Jesus Fiais Cerqueira, Wagner Luiz Alves de Oliveira, <strong>Orlando Mota Pires</strong>, Naiara Silva Bonfim dos Santos, Andre Brasil Vieira Wyzykowski, Oberdan Rocha Pinheiro, Daniel Gomes de Almeida Filho, Marcelo Oliveira da Silva, Josiane Dantas Viana Barbosa</span></span></p>
               <p class="meta">Electronics 13(24), 4867</p>
               <ul class="refs">
                 <li><a href="https://doi.org/10.3390/electronics13244867">doi:10.3390/electronics13244867</a></li>
@@ -724,7 +792,7 @@
             <div class="when">2024</div>
             <div class="what">
               <h3 lang="pt-BR">Protótipo de Correlação de Eventos de Leitura Labial com Medidas Temporais e Legendas</h3>
-              <p class="authors"><strong>Orlando Mota Pires</strong>, João Marcelo Silva Souza, Caroline da Silva M. Alves, Jés de Jesus F. Cerqueira, Wagner Luiz A. de Oliveira</p>
+              <p class="authors"><span class="more"><strong>Orlando Mota Pires</strong>, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 5 authors">…</button><span class="more-text"><strong>Orlando Mota Pires</strong>, João Marcelo Silva Souza, Caroline da Silva M. Alves, Jés de Jesus F. Cerqueira, Wagner Luiz A. de Oliveira</span></span></p>
               <p class="meta">XXV Congresso Brasileiro de Automática (CBA)</p>
             </div>
           </article>
@@ -733,7 +801,7 @@
             <div class="when">2023</div>
             <div class="what">
               <h3>Tuning a CPU-Based Stencil Computation in a DPC++ Multi-Device Environment</h3>
-              <p class="authors">Tiago Conceição Oliveira, Murilo Boratto, Antônio Horácio Rodrigues, <strong>Orlando Mota Pires</strong>, Leonardo Rodrigues Soares</p>
+              <p class="authors"><span class="more">Tiago Conceição Oliveira, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 5 authors">…</button>, <strong>Orlando Mota Pires</strong>, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 5 authors">…</button><span class="more-text">Tiago Conceição Oliveira, Murilo Boratto, Antônio Horácio Rodrigues, <strong>Orlando Mota Pires</strong>, Leonardo Rodrigues Soares</span></span></p>
               <p class="meta">Journal of Bioengineering, Technologies and Health 6(Suppl. 1), <span class="nowrap">24–30</span></p>
               <ul class="refs">
                 <li><a href="https://doi.org/10.34178/jbth.v6iSuppl1.269">doi:10.34178/jbth.v6iSuppl1.269</a></li>
@@ -745,7 +813,7 @@
             <div class="when">2022</div>
             <div class="what">
               <h3>OneAPI: an Approach for Developer-Centered Heterogeneous Computing</h3>
-              <p class="authors">T. Conceição, A. H. Rodrigues, <strong>O. Pires</strong>, L. Soares</p>
+              <p class="authors"><span class="more">T. Conceição, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 4 authors">…</button>, <strong>O. Pires</strong>, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 4 authors">…</button><span class="more-text">T. Conceição, A. H. Rodrigues, <strong>O. Pires</strong>, L. Soares</span></span></p>
               <p class="meta">WSCAD 2022</p>
             </div>
           </article>
@@ -754,7 +822,7 @@
             <div class="when">2019</div>
             <div class="what">
               <h3>Statistical Study of Eco-Efficiency in Compact and Average Cars (Chevrolet, Ford, VW, Fiat, Renault) in Brazil Based on the Metro Table in 2019</h3>
-              <p class="authors">A. Wenceslau, A. Widmer, G. Dunkel, J. Samuel, <strong>O. Pires</strong>, A. Nascimento</p>
+              <p class="authors"><span class="more">A. Wenceslau, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 6 authors">…</button>, <strong>O. Pires</strong>, <button type="button" class="more-btn dots" aria-expanded="false" aria-label="Show all 6 authors">…</button><span class="more-text">A. Wenceslau, A. Widmer, G. Dunkel, J. Samuel, <strong>O. Pires</strong>, A. Nascimento</span></span></p>
               <p class="meta">Journal of Bioengineering, Technologies and Health</p>
             </div>
           </article>
@@ -784,9 +852,8 @@
           <article class="entry" id="juelich">
             <div class="when">2025</div>
             <div class="what">
-              <h3>JUNIQ-EPIQ Summer School on Quantum Computing</h3>
+              <h3>JUNIQ-EPIQ Summer School on Quantum Computing <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: JUNIQ-EPIQ Summer School on Quantum Computing">i</button><span class="more-text">Solved max-cut and travelling salesman problems on gate-based quantum devices and quantum annealers.</span></span></h3>
               <p class="org">Jülich Supercomputing Centre, Germany</p>
-              <p>Solved max-cut and travelling salesman problems on gate-based quantum devices and quantum annealers.</p>
               <ul class="refs">
                 <li><a href="assets/pdf/Teilnahmebest%C3%A4tigung%20Mota%20Pires.pdf">Certificate (PDF)</a></li>
               </ul>
@@ -808,18 +875,16 @@
           <article class="entry" id="programming-club">
             <div class="when">2021 – 2024</div>
             <div class="what">
-              <h3>Co-founder, Programming Club</h3>
+              <h3>Co-founder, Programming Club <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Co-founder, Programming Club">i</button><span class="more-text">Taught algorithms and programming logic to engineering students, organized competitive programming marathons such as OBI and SBC, and ran the student initiative.</span></span></h3>
               <p class="org">Senai Cimatec, Salvador</p>
-              <p>Taught algorithms and programming logic to engineering students, organized competitive programming marathons such as OBI and SBC, and ran the student initiative.</p>
             </div>
           </article>
 
           <article class="entry">
             <div class="when">2023</div>
             <div class="what">
-              <h3>Intel Student Ambassador</h3>
+              <h3>Intel Student Ambassador <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Intel Student Ambassador">i</button><span class="more-text">Ran workshops on Intel technologies for students at the university.</span></span></h3>
               <p class="org">Senai Cimatec, Salvador</p>
-              <p>Ran workshops on Intel technologies for students at the university.</p>
               <ul class="refs">
                 <li><a href="https://devmesh.intel.com/users/orlando-mota">Intel DevMesh profile</a></li>
               </ul>
@@ -829,9 +894,8 @@
           <article class="entry">
             <div class="when">2022</div>
             <div class="what">
-              <h3>Teaching assistant, Algorithms and Computational Thinking</h3>
+              <h3>Teaching assistant, Algorithms and Computational Thinking <span class="more"><button type="button" class="more-btn" aria-expanded="false" aria-label="About: Teaching assistant, Algorithms and Computational Thinking">i</button><span class="more-text">Graded assignments and exams, and taught extra classes.</span></span></h3>
               <p class="org">Senai Cimatec, Salvador</p>
-              <p>Graded assignments and exams, and taught extra classes.</p>
             </div>
           </article>
         </section>
@@ -870,6 +934,38 @@
 
       button.hidden = false;
       render();
+    })();
+  </script>
+
+  <script>
+    // The "i" next to a title: a click or tap pins its description open,
+    // a click elsewhere or Escape closes it.
+    (function () {
+      function closeAll(except) {
+        document.querySelectorAll('.more.open').forEach(function (m) {
+          if (m === except) return;
+          m.classList.remove('open');
+          m.querySelectorAll('.more-btn').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+        });
+      }
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.more-btn');
+        if (!btn) {
+          if (!e.target.closest('.more-text')) closeAll(null);
+          return;
+        }
+        var more = btn.parentElement;
+        var open = !more.classList.contains('open');
+        closeAll(more);
+        more.classList.toggle('open', open);
+        more.querySelectorAll('.more-btn').forEach(function (b) { b.setAttribute('aria-expanded', String(open)); });
+        if (!open) btn.blur();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        closeAll(null);
+        if (document.activeElement && document.activeElement.classList.contains('more-btn')) document.activeElement.blur();
+      });
     })();
   </script>
 
